@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Course list and credit calculator for BYU-Pathway student portal.">
+    <title>WDD 231 - Course Portal</title>
+    <!-- Tailwind CSS for rapid, light, and responsive UI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensuring contrast and smooth transitions */
+        :root {
+            --primary-blue: #003366;
+            --accent-gold: #ffcc00;
+        }
+        .course-card.completed {
+            background-color: #d1fae5; /* Light green */
+            border-color: #10b981;
+        }
+        .course-card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .course-card:hover {
+            transform: translateY(-2px);
+        }
+        /* Accessibility: skip to main content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 flex flex-col min-h-screen font-sans">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <!-- Header & Navigation -->
+    <header class="bg-[#003366] text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight">Course Portfolio</h1>
+            <nav id="main-nav">
+                <button id="menu-toggle" class="md:hidden p-2 focus:outline-none" aria-label="Toggle navigation menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <ul id="nav-list" class="hidden md:flex space-x-8 font-medium">
+                    <li><a href="#" class="hover:text-yellow-400 border-b-2 border-transparent hover:border-yellow-400 pb-1">Home</a></li>
+                    <li><a href="#" class="hover:text-yellow-400 border-b-2 border-transparent hover:border-yellow-400 pb-1">Certificate</a></li>
+                    <li><a href="#" class="hover:text-yellow-400 border-b-2 border-transparent hover:border-yellow-400 pb-1">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Mobile Menu -->
+        <ul id="mobile-nav" class="hidden flex-col bg-[#002244] md:hidden px-4 py-4 space-y-4">
+            <li><a href="#" class="block hover:text-yellow-400">Home</a></li>
+            <li><a href="#" class="block hover:text-yellow-400">Certificate</a></li>
+            <li><a href="#" class="block hover:text-yellow-400">Contact</a></li>
+        </ul>
+    </header>
+
+    <main id="main-content" class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow">
+        <!-- Wireframe-based structure: Hero/Intro -->
+        <section class="bg-white rounded-lg shadow-sm p-6 mb-8 border-l-4 border-[#003366]">
+            <h2 class="text-xl font-bold mb-2">My Academic Path</h2>
+            <p class="text-gray-600">Explore the courses completed and remaining in the program. Use the filters below to browse by subject.</p>
+        </section>
+
+        <!-- Course Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar / Filter (Orientation system) -->
+            <aside class="lg:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Filters</h3>
+                    <div class="flex flex-col space-y-2" id="filter-buttons">
+                        <button data-filter="all" class="filter-btn bg-[#003366] text-white py-2 px-4 rounded transition hover:bg-opacity-90">All Courses</button>
+                        <button data-filter="CSE" class="filter-btn bg-gray-200 text-gray-800 py-2 px-4 rounded transition hover:bg-gray-300">CSE Only</button>
+                        <button data-filter="WDD" class="filter-btn bg-gray-200 text-gray-800 py-2 px-4 rounded transition hover:bg-gray-300">WDD Only</button>
+                    </div>
+                </div>
+
+                <div class="bg-indigo-900 text-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-bold text-lg mb-2">Credit Summary</h3>
+                    <p class="text-3xl font-mono font-bold" id="total-credits">0</p>
+                    <p class="text-sm opacity-80 mt-1">Total credits in selection</p>
+                </div>
+            </aside>
+
+            <!-- Dynamic Course Grid -->
+            <section class="lg:col-span-3">
+                <div id="course-container" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                    <!-- Courses injected here by JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer with Dynamic Data -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center space-y-2">
+            <p>&copy; <span id="current-year"></span> | Athanase Kazadi Muamba | <span class="text-yellow-400">WDD 231 Portfolio</span></p>
+            <p class="text-gray-400 text-sm italic">Last Modified: <span id="last-modified"></span></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA ---
+        const courses = [
+            { id: 1, subject: 'CSE', number: 110, title: 'Intro to Programming', credits: 2, completed: true },
+            { id: 2, subject: 'WDD', number: 130, title: 'Web Fundamentals', credits: 2, completed: true },
+            { id: 3, subject: 'CSE', number: 111, title: 'Programming with Functions', credits: 2, completed: true },
+            { id: 4, subject: 'WDD', number: 131, title: 'Web Frontend I', credits: 2, completed: true },
+            { id: 5, subject: 'WDD', number: 231, title: 'Web Frontend II', credits: 3, completed: false },
+            { id: 6, subject: 'CSE', number: 210, title: 'Programming with Objects', credits: 2, completed: false }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const courseContainer = document.getElementById('course-container');
+        const totalCreditsEl = document.getElementById('total-credits');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        // --- FUNCTIONS ---
+
+        /**
+         * Renders the course cards based on a filtered list
+         */
+        function displayCourses(filteredList) {
+            courseContainer.innerHTML = '';
+            
+            filteredList.forEach(course => {
+                const card = document.createElement('div');
+                card.className = `course-card p-5 rounded-lg border-2 bg-white shadow-sm flex flex-col justify-between ${course.completed ? 'completed border-green-500' : 'border-gray-200'}`;
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">${course.subject} ${course.number}</span>
+                            ${course.completed ? '<span class="text-green-600 font-bold text-xs">✓ Done</span>' : '<span class="text-orange-500 font-bold text-xs">Pending</span>'}
+                        </div>
+                        <h4 class="font-bold text-lg text-gray-800 leading-tight">${course.title}</h4>
+                    </div>
+                    <p class="mt-4 text-sm font-semibold text-gray-600">${course.credits} Credits</p>
+                `;
+                courseContainer.appendChild(card);
+            });
+
+            calculateTotalCredits(filteredList);
+        }
+
+        /**
+         * Calculates total credits using reduce()
+         */
+        function calculateTotalCredits(list) {
+            const total = list.reduce((sum, course) => sum + course.credits, 0);
+            totalCreditsEl.textContent = total;
+        }
+
+        /**
+         * Handles filtering logic
+         */
+        function handleFilter(e) {
+            const filter = e.target.getAttribute('data-filter');
+            
+            // Update UI buttons
+            filterButtons.forEach(btn => {
+                btn.classList.replace('bg-[#003366]', 'bg-gray-200');
+                btn.classList.replace('text-white', 'text-gray-800');
+            });
+            e.target.classList.replace('bg-gray-200', 'bg-[#003366]');
+            e.target.classList.replace('text-gray-800', 'text-white');
+
+            const filtered = filter === 'all' 
+                ? courses 
+                : courses.filter(c => c.subject === filter);
+            
+            displayCourses(filtered);
+        }
+
+        // --- INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            // Initial render
+            displayCourses(courses);
+
+            // Filter listeners
+            filterButtons.forEach(btn => btn.addEventListener('click', handleFilter));
+
+            // Navigation Toggle (Mobile)
+            menuToggle.addEventListener('click', () => {
+                mobileNav.classList.toggle('hidden');
+                mobileNav.classList.toggle('flex');
+            });
+
+            // Footer Data
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            document.getElementById('last-modified').textContent = document.lastModified;
+        });
+    </script>
+</body>
+</html>
