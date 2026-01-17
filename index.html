@@ -3,254 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="WDD 231 Course Portal for Athanase Muamba Kazadi. Highlighting web development skills and course progress.">
-    <title>WDD 231 - Course Portal - Athanase Muamba Kazadi</title>
+    <meta name="description" content="Official course portal for WDD 231 - Web Frontend Development I. This page showcases course progress and accessibility compliance.">
+    <title>WDD 231 Portal | Athanase Muamba Kazadi</title>
     
-    <!-- Google Fonts for professional look -->
+    <!-- Google Fonts for better readability -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
+        /* COLOR VARIABLES - High Contrast AA/AAA compliant */
         :root {
-            --primary-dark: #05445E;
-            --secondary-teal: #189AB4;
-            --light-bg: #f8fafc;
-            --accent-glow: #75E6DA;
+            --primary-bg: #ffffff;
+            --text-main: #121212; /* Nearly black for max contrast */
+            --header-bg: #002d5b; /* Deep navy */
+            --nav-bg: #222222;
+            --accent-color: #ffd700;
+            --card-border: #333333;
+            
+            /* Status Colors with safe contrast ratios */
+            --completed-bg: #d4edda;
+            --completed-text: #0b4b1f; /* Dark green */
+            --pending-bg: #f8d7da;
+            --pending-text: #721c24; /* Dark red */
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--light-bg);
-            color: #1e293b;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        /* HEADER & NAV */
         header {
-            background-color: var(--primary-dark);
+            background-color: var(--header-bg);
             color: white;
-            padding: 2.5rem 1rem;
+            padding: 2rem 1rem;
             text-align: center;
         }
 
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        /* NAVIGATION - High contrast focus */
         nav {
-            background-color: #1e293b;
+            background-color: var(--nav-bg);
             display: flex;
             justify-content: center;
-            padding: 0.75rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 0;
         }
 
         nav a {
-            color: white;
+            color: #ffffff;
             text-decoration: none;
-            padding: 0.5rem 1.5rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        /* Wayfinding Indicator */
-        nav a.active {
-            color: var(--accent-glow);
-            border-bottom: 2px solid var(--accent-glow);
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: inline-block;
         }
 
         nav a:hover {
-            color: var(--accent-glow);
+            background-color: #444;
+            text-decoration: underline;
+        }
+
+        nav a.active {
+            background-color: var(--accent-color);
+            color: #000000; /* High contrast on gold */
         }
 
         /* RESPONSIVE GRID LAYOUT */
-        .main-container {
+        .container {
             max-width: 1100px;
             margin: 2rem auto;
-            padding: 0 1.5rem;
+            padding: 0 1rem;
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
-            flex: 1;
         }
 
-        @media (min-width: 768px) {
-            .main-container {
-                grid-template-columns: 2.5fr 1fr; /* Multi-column layout requirement */
+        @media (min-width: 800px) {
+            .container {
+                grid-template-columns: 2fr 1fr; /* Multi-column layout */
             }
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            background: var(--primary-bg);
+            border: 1px solid #ccc;
+            border-radius: 8px;
             padding: 1.5rem;
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* COURSE CARDS */
-        .course-grid {
+        h2, h3 {
+            color: var(--header-bg);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* COURSE SECTION */
+        .filter-buttons {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* High Contrast Buttons */
+        .btn {
+            background-color: var(--header-bg);
+            color: white;
+            border: 2px solid var(--header-bg);
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: #ffffff;
+            color: var(--header-bg);
+            outline: 3px solid var(--accent-color);
+        }
+
+        .course-display {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1rem;
-            margin-top: 1.5rem;
         }
 
         .course-item {
-            background-color: #cbd5e1;
-            padding: 1.25rem;
-            border-radius: 8px;
+            padding: 1rem;
             text-align: center;
-            font-weight: 700;
-            color: #334155;
-            transition: transform 0.2s;
+            font-weight: bold;
+            border: 2px solid var(--card-border);
+            border-radius: 5px;
         }
 
-        .course-item.completed {
-            background-color: var(--secondary-teal);
-            color: white;
+        /* Contrast Safe States */
+        .completed {
+            background-color: var(--completed-bg);
+            color: var(--completed-text);
         }
 
-        /* FILTERS */
-        .filter-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+        .incomplete {
+            background-color: var(--pending-bg);
+            color: var(--pending-text);
         }
 
-        .filter-buttons button {
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
+        .credit-info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #eee;
+            border-left: 5px solid var(--header-bg);
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        .filter-buttons button:hover {
-            opacity: 0.9;
-        }
-
-        /* FOOTER */
         footer {
-            background-color: var(--primary-dark);
+            background-color: var(--header-bg);
             color: white;
             text-align: center;
-            padding: 1.5rem;
-            margin-top: auto;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
         }
 
-        footer p { margin: 0.25rem 0; font-size: 0.9rem; }
+        .last-update {
+            color: var(--accent-color);
+            margin-top: 0.5rem;
+            display: block;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="text-4xl font-bold">Athanase Muamba Kazadi</h1>
-        <p class="text-xl opacity-90">Web Frontend II - Course Portal</p>
+        <h1>Athanase Muamba Kazadi</h1>
     </header>
 
     <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="chamber/index.html">Chamber</a>
-        <a href="project/index.html">Project</a>
+        <a href="#" class="active">Home</a>
+        <a href="#">Chamber</a>
+        <a href="#">Project</a>
     </nav>
 
-    <div class="main-container">
-        <!-- Main Content (Column 1) -->
+    <div class="container">
+        <!-- Main Column -->
         <main>
             <section class="card">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2">Course Work</h2>
+                <h2>WDD 231 Course Work</h2>
                 
                 <div class="filter-buttons">
-                    <button onclick="filterCourses('all')">Show All</button>
-                    <button onclick="filterCourses('CSE')">CSE Courses</button>
-                    <button onclick="filterCourses('WDD')">WDD Courses</button>
+                    <button class="btn" onclick="filterData('all')">All</button>
+                    <button class="btn" onclick="filterData('CSE')">CSE</button>
+                    <button class="btn" onclick="filterData('WDD')">WDD</button>
                 </div>
 
-                <div id="course-display" class="course-grid">
-                    <!-- Dynamic content loads here -->
+                <div id="course-list" class="course-display">
+                    <!-- Injected by JavaScript -->
                 </div>
 
-                <div class="mt-8 p-4 bg-teal-50 border border-teal-200 rounded-lg text-center">
-                    <span class="text-teal-900 font-bold">Total Credits: </span>
-                    <span id="credit-total" class="text-2xl text-teal-700 font-black">0</span>
+                <div class="credit-info">
+                    Total Credits: <span id="total-credits">0</span>
                 </div>
             </section>
         </main>
 
-        <!-- Sidebar (Column 2) - Critical for "More than one column" feedback -->
-        <aside class="flex flex-col gap-6">
+        <!-- Sidebar Column -->
+        <aside>
             <section class="card">
-                <h3 class="text-lg font-bold text-teal-800 mb-2">Student Info</h3>
-                <p class="text-sm leading-relaxed text-gray-600">
-                    Location: Lubumbashi, DRC<br>
-                    Focus: Responsive Architecture & UI/UX
-                </p>
-            </section>
-            
-            <section class="card bg-gray-900 text-white border-none">
-                <h3 class="text-lg font-bold text-teal-400 mb-2">Resources</h3>
-                <ul class="text-xs space-y-2 opacity-80">
-                    <li>• MDN Web Docs</li>
-                    <li>• Tailwind CSS Docs</li>
-                    <li>• W3C Validator</li>
-                </ul>
+                <h3>About Me</h3>
+                <p><strong>Location:</strong> Lubumbashi, DR Congo</p>
+                <p>I am currently a student in the WDD 231 course at BYU-Idaho, focused on mastering web technologies and accessibility.</p>
+                <p>This portal is designed to meet the highest accessibility standards (WCAG AA/AAA).</p>
             </section>
         </aside>
     </div>
 
     <footer>
-        <p>&copy; <span id="year"></span> | Athanase Muamba Kazadi | Democratic Republic of the Congo</p>
-        <p id="modification" class="italic text-teal-300"></p>
+        <p>&copy; <span id="year"></span> | Athanase Muamba Kazadi | DR Congo</p>
+        <span class="last-update" id="modified"></span>
     </footer>
 
     <script>
         const courseData = [
-            { subject: 'CSE', number: 110, title: 'Intro to Programming', credits: 2, completed: true },
-            { subject: 'WDD', number: 130, title: 'Web Fundamentals', credits: 2, completed: true },
-            { subject: 'CSE', number: 111, title: 'Functions', credits: 2, completed: true },
-            { subject: 'WDD', number: 131, title: 'Frontend I', credits: 2, completed: true },
-            { subject: 'WDD', number: 231, title: 'Frontend II', credits: 3, completed: false },
-            { subject: 'CSE', number: 210, title: 'Object Oriented', credits: 2, completed: false }
+            { id: 1, subject: 'CSE', number: 110, credits: 2, done: true },
+            { id: 2, subject: 'WDD', number: 130, credits: 2, done: true },
+            { id: 3, subject: 'CSE', number: 111, credits: 2, done: true },
+            { id: 4, subject: 'WDD', number: 131, credits: 2, done: true },
+            { id: 5, subject: 'WDD', number: 231, credits: 3, done: false },
+            { id: 6, subject: 'CSE', number: 210, credits: 2, done: false }
         ];
 
         function renderCourses(list) {
-            const display = document.getElementById('course-display');
-            display.innerHTML = '';
-
-            list.forEach(c => {
-                const el = document.createElement('div');
-                el.className = `course-item ${c.completed ? 'completed' : ''}`;
-                el.textContent = `${c.subject} ${c.number}`;
-                display.appendChild(el);
+            const container = document.getElementById('course-list');
+            container.innerHTML = '';
+            
+            list.forEach(course => {
+                const div = document.createElement('div');
+                div.className = `course-item ${course.done ? 'completed' : 'incomplete'}`;
+                div.textContent = `${course.subject} ${course.number}`;
+                container.appendChild(div);
             });
 
-            // Using .reduce() as per rubric requirement
             const total = list.reduce((acc, curr) => acc + curr.credits, 0);
-            document.getElementById('credit-total').textContent = total;
+            document.getElementById('total-credits').textContent = total;
         }
 
-        function filterCourses(type) {
-            if (type === 'all') {
+        function filterData(category) {
+            if (category === 'all') {
                 renderCourses(courseData);
             } else {
-                renderCourses(courseData.filter(c => c.subject === type));
+                const filtered = courseData.filter(c => c.subject === category);
+                renderCourses(filtered);
             }
         }
 
-        // Initialize Page
-        window.addEventListener('DOMContentLoaded', () => {
+        window.onload = () => {
             document.getElementById('year').textContent = new Date().getFullYear();
-            document.getElementById('modification').textContent = `Last Update: ${document.lastModified}`;
+            document.getElementById('modified').textContent = `Last Modified: ${document.lastModified}`;
             renderCourses(courseData);
-        });
+        };
     </script>
 </body>
 </html>
