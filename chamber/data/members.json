@@ -1,0 +1,67 @@
+{
+  "members": [
+    {
+      "name": "Katanga Mining Corp",
+      "address": "123 Mining Road, Lubumbashi",
+      "phone": "+243 810 000 001",
+      "website": "https://example.com/kmc",
+      "image": "images/member1.webp",
+      "membership": "Gold",
+      "tags": ["Mining", "Export"]
+    },
+    {
+      "name": "Grand Karavia Hotel",
+      "address": "Route du Golf, Lubumbashi",
+      "phone": "+243 810 000 002",
+      "website": "https://example.com/karavia",
+      "image": "images/member2.webp",
+      "membership": "Gold",
+      "tags": ["Tourism", "Luxury"]
+    },
+    {
+      "name": "Lubum Tech Hub",
+      "address": "45 Tech Avenue, Lubumbashi",
+      "phone": "+243 850 000 003",
+      "website": "https://example.com/tech",
+      "image": "images/member3.webp",
+      "membership": "Silver",
+      "tags": ["IT", "Innovation"]
+    },
+    {
+      "name": "Hyper Psaro",
+      "address": "Avenue Ndjamena, Lubumbashi",
+      "phone": "+243 810 000 004",
+      "website": "https://example.com/psaro",
+      "image": "images/member4.webp",
+      "membership": "Gold",
+      "tags": ["Retail", "Logistics"]
+    },
+    {
+      "name": "Congo Bâtiment",
+      "address": "12 Likasi Road, Lubumbashi",
+      "phone": "+243 970 000 005",
+      "website": "https://example.com/cbat",
+      "image": "images/member5.webp",
+      "membership": "Member",
+      "tags": ["Construction"]
+    },
+    {
+      "name": "L'Hacienda",
+      "address": "Golf District, Lubumbashi",
+      "phone": "+243 990 000 006",
+      "website": "https://example.com/hacienda",
+      "image": "images/member6.webp",
+      "membership": "Silver",
+      "tags": ["Restaurant", "Service"]
+    },
+    {
+      "name": "Equity BCDC",
+      "address": "Avenue de la Poste, Lubumbashi",
+      "phone": "+243 810 000 007",
+      "website": "https://example.com/equity",
+      "image": "images/member7.webp",
+      "membership": "Gold",
+      "tags": ["Banking", "Finance"]
+    }
+  ]
+}
