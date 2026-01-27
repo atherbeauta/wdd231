@@ -3,273 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official course portal for WDD 231 - Web Frontend Development I. This page showcases course progress and accessibility compliance.">
-    <title>WDD 231 Portal | Athanase Muamba Kazadi</title>
+    <title>Lubumbashi Chamber of Commerce | Home</title>
+    <meta name="description" content="W03 Chamber Home page for WDD231. Supporting business growth in Lubumbashi with weather updates and member spotlights.">
+    <meta name="author" content="Your Name">
     
-    <!-- Google Fonts for better readability -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* COLOR VARIABLES - High Contrast AA/AAA compliant */
-        :root {
-            --primary-bg: #ffffff;
-            --text-main: #121212; /* Nearly black for max contrast */
-            --header-bg: #002d5b; /* Deep navy */
-            --nav-bg: #222222;
-            --accent-color: #ffd700;
-            --card-border: #333333;
-            
-            /* Status Colors with safe contrast ratios */
-            --completed-bg: #d4edda;
-            --completed-text: #0b4b1f; /* Dark green */
-            --pending-bg: #f8d7da;
-            --pending-text: #721c24; /* Dark red */
-        }
+    <meta property="og:title" content="Lubumbashi Chamber of Commerce">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourdomain.com/images/hero-large.jpg">
+    <meta property="og:url" content="https://yourdomain.com/index.html">
 
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: var(--header-bg);
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-
-        /* NAVIGATION - High contrast focus */
-        nav {
-            background-color: var(--nav-bg);
-            display: flex;
-            justify-content: center;
-            padding: 0;
-        }
-
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            padding: 1rem 1.5rem;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        nav a:hover {
-            background-color: #444;
-            text-decoration: underline;
-        }
-
-        nav a.active {
-            background-color: var(--accent-color);
-            color: #000000; /* High contrast on gold */
-        }
-
-        /* RESPONSIVE GRID LAYOUT */
-        .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        @media (min-width: 800px) {
-            .container {
-                grid-template-columns: 2fr 1fr; /* Multi-column layout */
-            }
-        }
-
-        .card {
-            background: var(--primary-bg);
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        h2, h3 {
-            color: var(--header-bg);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-        }
-
-        /* COURSE SECTION */
-        .filter-buttons {
-            margin-bottom: 1.5rem;
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        /* High Contrast Buttons */
-        .btn {
-            background-color: var(--header-bg);
-            color: white;
-            border: 2px solid var(--header-bg);
-            padding: 0.6rem 1.2rem;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn:hover, .btn:focus {
-            background-color: #ffffff;
-            color: var(--header-bg);
-            outline: 3px solid var(--accent-color);
-        }
-
-        .course-display {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-        }
-
-        .course-item {
-            padding: 1rem;
-            text-align: center;
-            font-weight: bold;
-            border: 2px solid var(--card-border);
-            border-radius: 5px;
-        }
-
-        /* Contrast Safe States */
-        .completed {
-            background-color: var(--completed-bg);
-            color: var(--completed-text);
-        }
-
-        .incomplete {
-            background-color: var(--pending-bg);
-            color: var(--pending-text);
-        }
-
-        .credit-info {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: #eee;
-            border-left: 5px solid var(--header-bg);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        footer {
-            background-color: var(--header-bg);
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 3rem;
-        }
-
-        .last-update {
-            color: var(--accent-color);
-            margin-top: 0.5rem;
-            display: block;
-        }
-    </style>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/medium.css">
+    <link rel="stylesheet" href="styles/large.css">
 </head>
 <body>
-
     <header>
-        <h1>Athanase Muamba Kazadi</h1>
+        <div class="header-container">
+            <img src="images/logo.png" alt="Lubumbashi Chamber Logo" class="logo" width="100" height="100">
+            <div class="header-text">
+                <h1>Lubumbashi Chamber</h1>
+                <span>Commerce & Community</span>
+            </div>
+            <button id="menu" title="Menu"></button>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="directory.html">Directory</a></li>
+                <li><a href="join.html">Join</a></li>
+                <li><a href="discover.html">Discover</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <nav>
-        <a href="#" class="active">Home</a>
-        <a href="#">Chamber</a>
-        <a href="#">Project</a>
-    </nav>
+    <main class="home-grid">
+        <!-- Hero Section -->
+        <section class="hero">
+            <picture>
+                <source srcset="images/hero-small.webp" media="(max-width: 600px)">
+                <source srcset="images/hero-medium.webp" media="(max-width: 960px)">
+                <img src="images/hero-large.webp" alt="Lubumbashi Cityscape" width="1200" height="600">
+            </picture>
+            <div class="hero-label">
+                <h2>Welcome to Lubumbashi</h2>
+                <p>The heartbeat of mining and commerce in DRC.</p>
+                <a href="join.html" class="cta-button">Join the Chamber</a>
+            </div>
+        </section>
 
-    <div class="container">
-        <!-- Main Column -->
-        <main>
-            <section class="card">
-                <h2>WDD 231 Course Work</h2>
-                
-                <div class="filter-buttons">
-                    <button class="btn" onclick="filterData('all')">All</button>
-                    <button class="btn" onclick="filterData('CSE')">CSE</button>
-                    <button class="btn" onclick="filterData('WDD')">WDD</button>
-                </div>
+        <!-- Current Events -->
+        <section class="events">
+            <h3>Upcoming Events</h3>
+            <ul>
+                <li><strong>Mining Summit:</strong> Dec 15th at Pullman Grand Karavia.</li>
+                <li><strong>Tech Workshop:</strong> Jan 5th at the Innovation Hub.</li>
+            </ul>
+        </section>
 
-                <div id="course-list" class="course-display">
-                    <!-- Injected by JavaScript -->
-                </div>
+        <!-- Weather Section -->
+        <section class="weather">
+            <h3>Current Weather</h3>
+            <div id="weather-info">
+                <p>Loading weather data...</p>
+                <!-- API data will be injected here -->
+            </div>
+        </section>
 
-                <div class="credit-info">
-                    Total Credits: <span id="total-credits">0</span>
-                </div>
-            </section>
-        </main>
-
-        <!-- Sidebar Column -->
-        <aside>
-            <section class="card">
-                <h3>About Me</h3>
-                <p><strong>Location:</strong> Lubumbashi, DR Congo</p>
-                <p>I am currently a student in the WDD 231 course at BYU-Idaho, focused on mastering web technologies and accessibility.</p>
-                <p>This portal is designed to meet the highest accessibility standards (WCAG AA/AAA).</p>
-            </section>
-        </aside>
-    </div>
+        <!-- Member Spotlights (Weekly Requirement) -->
+        <section class="spotlights">
+            <h3>Member Spotlights</h3>
+            <div id="spotlight-container">
+                <!-- JavaScript will inject 2-3 random Gold/Silver members here -->
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; <span id="year"></span> | Athanase Muamba Kazadi | DR Congo</p>
-        <span class="last-update" id="modified"></span>
+        <div class="footer-container">
+            <div class="footer-contact">
+                <img src="images/logo.png" alt="Logo" width="80">
+                <p><strong>Lubumbashi Chamber of Commerce</strong></p>
+                <p>1234 Avenue Mama Yemo, Lubumbashi, DRC</p>
+                <p>info@lubuchamber.cd | +243 81 000 0000</p>
+            </div>
+            <div class="footer-social">
+                <a href="#">Facebook</a>
+                <a href="#">LinkedIn</a>
+            </div>
+            <div class="footer-copy">
+                <p>&copy; <span id="year"></span> | Your Name | WDD231</p>
+                <p id="lastModified"></p>
+            </div>
+        </div>
     </footer>
 
-    <script>
-        const courseData = [
-            { id: 1, subject: 'CSE', number: 110, credits: 2, done: true },
-            { id: 2, subject: 'WDD', number: 130, credits: 2, done: true },
-            { id: 3, subject: 'CSE', number: 111, credits: 2, done: true },
-            { id: 4, subject: 'WDD', number: 131, credits: 2, done: true },
-            { id: 5, subject: 'WDD', number: 231, credits: 3, done: false },
-            { id: 6, subject: 'CSE', number: 210, credits: 2, done: false }
-        ];
-
-        function renderCourses(list) {
-            const container = document.getElementById('course-list');
-            container.innerHTML = '';
-            
-            list.forEach(course => {
-                const div = document.createElement('div');
-                div.className = `course-item ${course.done ? 'completed' : 'incomplete'}`;
-                div.textContent = `${course.subject} ${course.number}`;
-                container.appendChild(div);
-            });
-
-            const total = list.reduce((acc, curr) => acc + curr.credits, 0);
-            document.getElementById('total-credits').textContent = total;
-        }
-
-        function filterData(category) {
-            if (category === 'all') {
-                renderCourses(courseData);
-            } else {
-                const filtered = courseData.filter(c => c.subject === category);
-                renderCourses(filtered);
-            }
-        }
-
-        window.onload = () => {
-            document.getElementById('year').textContent = new Date().getFullYear();
-            document.getElementById('modified').textContent = `Last Modified: ${document.lastModified}`;
-            renderCourses(courseData);
-        };
-    </script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/spotlights.js"></script>
 </body>
 </html>

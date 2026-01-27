@@ -1,0 +1,10 @@
+@media screen and (min-width: 1000px) {
+    .grid-layout {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    main {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}

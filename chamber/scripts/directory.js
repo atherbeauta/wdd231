@@ -1,58 +1,57 @@
-const url = "data/members.json";
-const display = document.querySelector("#members-container");
-const gridBtn = document.querySelector("#grid");
-const listBtn = document.querySelector("#list");
+const membersUrl = "data/members.json";
+const container = document.querySelector("#members-container");
+const gridBtn = document.querySelector("#grid-view-btn");
+const listBtn = document.querySelector("#list-view-btn");
+const menuBtn = document.querySelector("#menu-btn");
+const navList = document.querySelector("#nav-list");
 
-// 1. ASYNC FETCH FUNCTION (Criteria 8)
-async function getMembers() {
+// 1. Hamburger Menu Logic
+menuBtn.addEventListener("click", () => {
+    navList.classList.toggle("open");
+    menuBtn.classList.toggle("open");
+});
+
+// 2. Fetch JSON Data (Async/Await)
+async function fetchMembers() {
     try {
-        const response = await fetch(url);
+        const response = await fetch(membersUrl);
         if (response.ok) {
             const data = await response.json();
             displayMembers(data.members);
-        } else {
-            throw new Error("Could not fetch data");
         }
     } catch (error) {
-        console.error("Fetch Error:", error);
-        display.innerHTML = "<p>Unable to load directory data.</p>";
+        console.error("Error loading data:", error);
     }
 }
 
-// 2. DISPLAY FUNCTION (Criteria 9)
+// 3. Display Members
 function displayMembers(members) {
-    display.innerHTML = ""; // Clear current content
-
-    members.forEach((member) => {
-        const card = document.createElement("section");
-        
-        card.innerHTML = `
-            <img src="${member.image}" alt="Logo of ${member.name}" loading="lazy" width="100" height="100">
+    container.innerHTML = "";
+    members.forEach(member => {
+        const section = document.createElement("section");
+        section.innerHTML = `
+            <img src="${member.image}" alt="${member.name} Logo" loading="lazy">
             <h3>${member.name}</h3>
             <p>${member.address}</p>
             <p>${member.phone}</p>
             <p><a href="${member.website}" target="_blank">Website</a></p>
-            <p class="membership-level">Level: ${member.membership}</p>
+            <p><strong>Membership:</strong> ${member.membership}</p>
         `;
-        
-        display.appendChild(card);
+        container.appendChild(section);
     });
 }
 
-// 3. TOGGLE VIEW LOGIC (Criteria 10)
+// 4. View Toggles
 gridBtn.addEventListener("click", () => {
-    display.classList.add("grid-view");
-    display.classList.remove("list-view");
+    container.className = "grid-layout";
 });
 
 listBtn.addEventListener("click", () => {
-    display.classList.add("list-view");
-    display.classList.remove("grid-view");
+    container.className = "list-layout";
 });
 
-// 4. FOOTER UPDATES
-document.querySelector("#year").textContent = new Date().getFullYear();
-document.querySelector("#lastModified").textContent = `Last Modified: ${document.lastModified}`;
+// 5. Footer Info
+document.querySelector("#current-year").textContent = new Date().getFullYear();
+document.querySelector("#last-modified").textContent = `Last Modified: ${document.lastModified}`;
 
-// Initial call
-getMembers();
+fetchMembers();

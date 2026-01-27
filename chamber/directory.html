@@ -3,51 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Directory | Lubumbashi Chamber of Commerce</title>
-    <meta name="description" content="W02 Chamber Directory page for WDD231. Explore our local business members in Lubumbashi.">
-    <meta name="author" content="Your Name">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <title>Member Directory - Lubumbashi Chamber of Commerce</title>
+    <meta name="description" content="Business directory for the Lubumbashi Chamber of Commerce. Explore local businesses in Grid or List view.">
+    <meta name="author" content="Athanase Muamba Kazadi">
     
-    <!-- External CSS -->
-    <link rel="stylesheet" href="styles/directory.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/medium.css">
+    <link rel="stylesheet" href="styles/larger.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico">
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <img src="images/logo.png" alt="Chamber Logo" class="logo" width="100" height="100">
+        <div class="logo-container">
+            <img src="images/kat.png" alt="Lubumbashi Chamber Logo" id="logo" width="100">
             <h1>Lubumbashi Chamber</h1>
         </div>
         <nav>
+            <button id="menu-button" aria-label="Toggle Menu">☰</button>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#" class="active">Directory</a></li>
-                <li><a href="#">Join</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="directory.html" class="active">Directory</a></li>
+                <li><a href="join.html">Join</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <div class="directory-controls">
+        <section class="directory-header">
             <h2>Business Directory</h2>
-            <div class="toggle-buttons">
-                <button id="grid" title="Grid View">Grid View</button>
-                <button id="list" title="List View">List View</button>
+            <div class="view-toggle">
+                <button id="grid-view" title="Grid View">Grid View</button>
+                <button id="list-view" title="List View">List View</button>
             </div>
-        </div>
+        </section>
 
-        <article id="members-container" class="grid-view">
-            <!-- JavaScript will inject cards here -->
+        <!-- Dynamic Content Area -->
+        <article id="member-container" class="grid-layout">
+            <!-- JavaScript will populate member cards here from members.json -->
         </article>
     </main>
 
     <footer>
         <div class="footer-info">
-            <p>&copy; <span id="year"></span> Lubumbashi Chamber of Commerce</p>
-            <p>Your Name | WDD231</p>
-            <p id="lastModified"></p>
+            <p>&copy; <span id="current-year"></span> Lubumbashi Chamber of Commerce</p>
+            <p>Athanase Muamba Kazadi | WDD 231 Project</p>
+            <p id="last-modified"></p>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="scripts/main.js"></script>
     <script src="scripts/directory.js"></script>
 </body>
 </html>
