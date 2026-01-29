@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lubumbashi Chamber of Commerce - Directory</title>
+    <meta name="description" content="Business directory for the Lubumbashi Chamber of Commerce. Discover local businesses and partners.">
+    <link rel="icon" href="favicon.ico">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/larger.css" media="(min-width: 768px)">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="images/chamber-logo.webp" alt="Chamber Logo" class="logo">
+            <h1>Lubumbashi Chamber</h1>
+            <button id="menu-button" title="Open Menu">☰</button>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="directory.html">Directory</a></li>
+                <li><a href="join.html">Join Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="directory-controls">
+            <h2>Business Directory</h2>
+            <div class="view-buttons">
+                <button id="grid-view" title="Grid View">Grid Layout</button>
+                <button id="list-view" title="List View">List Layout</button>
+            </div>
+        </section>
+
+        <div id="member-container" class="grid-layout">
+            <!-- Data loaded via JavaScript -->
+            <p>Loading members...</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-info">
+            <p>&copy; <span id="current-year"></span> Lubumbashi Chamber of Commerce</p>
+            <p>Haut-Katanga, DR Congo</p>
+            <p id="last-modified"></p>
+        </div>
+    </footer>
+
+    <script src="scripts/directory.js"></script>
+</body>
+</html>

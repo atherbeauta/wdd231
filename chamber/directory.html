@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Directory - Lubumbashi Chamber of Commerce</title>
-    <meta name="description" content="Business directory for the Lubumbashi Chamber of Commerce. Explore local businesses in Grid or List view.">
-    <meta name="author" content="Athanase Muamba Kazadi">
+    <title>Business Directory | Lubumbashi Chamber of Commerce</title>
+    <meta name="description" content="Official business directory of the Lubumbashi Chamber of Commerce. Explore our local partners and members.">
     
-    <!-- Stylesheets -->
+    <!-- CSS Files (shared with index.html) -->
     <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/medium.css">
-    <link rel="stylesheet" href="styles/larger.css">
+    <link rel="stylesheet" href="styles/larger.css" media="(min-width: 768px)">
     
     <!-- Favicon -->
-    <link rel="icon" href="images/favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
-        <div class="logo-container">
-            <img src="images/kat.png" alt="Lubumbashi Chamber Logo" id="logo" width="100">
-            <h1>Lubumbashi Chamber</h1>
+        <div class="header-container">
+            <img src="images/chamber-logo.webp" alt="Chamber Logo" class="logo">
+            <div class="header-text">
+                <h1>Lubumbashi Chamber</h1>
+                <p>Connecting Businesses in Haut-Katanga</p>
+            </div>
+            <button id="menu-button" aria-label="Toggle Menu">☰</button>
         </div>
         <nav>
-            <button id="menu-button" aria-label="Toggle Menu">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="directory.html" class="active">Directory</a></li>
@@ -34,29 +35,37 @@
 
     <main>
         <section class="directory-header">
-            <h2>Business Directory</h2>
-            <div class="view-toggle">
-                <button id="grid-view" title="Grid View">Grid View</button>
-                <button id="list-view" title="List View">List View</button>
+            <h2>Member Directory</h2>
+            <p>Support our local businesses and find trusted partners.</p>
+            
+            <div class="view-controls">
+                <button id="grid-view" title="Display as Grid">Grid View</button>
+                <button id="list-view" title="Display as List">List View</button>
             </div>
         </section>
 
-        <!-- Dynamic Content Area -->
-        <article id="member-container" class="grid-layout">
-            <!-- JavaScript will populate member cards here from members.json -->
-        </article>
+        <!-- Member data will be injected here by directory.js -->
+        <div id="member-container" class="grid-layout">
+            <div class="loading-spinner">Fetching member data...</div>
+        </div>
     </main>
 
     <footer>
-        <div class="footer-info">
-            <p>&copy; <span id="current-year"></span> Lubumbashi Chamber of Commerce</p>
-            <p>Athanase Muamba Kazadi | WDD 231 Project</p>
-            <p id="last-modified"></p>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h3>Lubumbashi Chamber</h3>
+                <p>123 Avenue de la Révolution</p>
+                <p>Lubumbashi, Haut-Katanga</p>
+                <p>Email: info@lushi-chamber.org</p>
+            </div>
+            <div class="footer-social">
+                <p>&copy; <span id="current-year"></span> | Lubumbashi Chamber | WDD 231 Project</p>
+                <p id="last-modified"></p>
+            </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="scripts/main.js"></script>
+    <!-- Script shared with index.html -->
     <script src="scripts/directory.js"></script>
 </body>
 </html>
