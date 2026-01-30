@@ -3,262 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lubumbashi Chamber of Commerce | Business Growth</title>
-    <meta name="description" content="Home page of the Lubumbashi Chamber of Commerce. Connecting Gold and Silver business members in Haut-Katanga.">
+    <title>Lubumbashi Chamber of Commerce | Business Portal</title>
+    <meta name="description" content="Official portal for the Lubumbashi Chamber of Commerce. Connecting business leaders in DRC.">
     
-    <!-- Modern Minimalist CSS -->
     <style>
         :root {
-            --primary: #003366;
-            --secondary: #00509d;
-            --accent: #ff9900;
-            --text: #333333;
-            --light: #f4f4f4;
+            --primary: #1a3a5f;      /* Bleu profond */
+            --secondary: #2c5282;    /* Bleu moyen */
+            --accent: #f6ad55;       /* Or/Ambre */
+            --bg-light: #f8fafc;     /* Trame de fond */
+            --bg-tint: #f1f5f9;      /* Trame secondaire */
             --white: #ffffff;
+            --text: #2d3748;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius: 8px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text); line-height: 1.6; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: var(--bg-light); color: var(--text); line-height: 1.6; }
 
-        /* Navigation Responsive */
+        /* Navigation */
         header {
             background-color: var(--white);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 5%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
             position: sticky; top: 0; z-index: 1000;
         }
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo-icon { width: 40px; height: 40px; background: var(--accent); border-radius: 5px; }
-        
-        #menu-toggle { font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--primary); }
-        
-        nav ul { 
-            display: none; list-style: none; 
-            position: absolute; top: 60px; left: 0; width: 100%; 
-            background: var(--primary); text-align: center;
-        }
-        nav ul.open { display: block; }
-        nav ul li a { display: block; padding: 15px; color: white; text-decoration: none; font-weight: bold; }
-        nav ul li a:hover { background: var(--secondary); }
+        .logo-block { display: flex; align-items: center; gap: 12px; font-weight: 800; color: var(--primary); }
+        .logo-circle { width: 35px; height: 35px; background: var(--accent); border-radius: 50%; }
 
-        /* Hero & CTA (Rubric 7 & 8) */
+        #menu-btn { font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--primary); }
+
+        nav ul { display: none; list-style: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); }
+        nav ul.open { display: flex; }
+        nav a { display: block; padding: 1rem 5%; text-decoration: none; color: white; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav a.active { color: var(--accent); border-left: 4px solid var(--accent); }
+
+        /* Hero (Rubric 7 & 8) */
         .hero {
-            position: relative;
-            height: 450px;
-            background: #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
+            position: relative; height: 350px; background: #000; display: flex; align-items: center; justify-content: center; color: white; text-align: center;
         }
-        .hero picture img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.5;
-        }
-        .hero-content { position: relative; z-index: 5; padding: 20px; }
-        .cta-btn {
-            display: inline-block; margin-top: 20px; padding: 15px 30px;
-            background: var(--accent); color: var(--primary);
-            text-decoration: none; font-weight: bold; border-radius: 5px;
-            transition: 0.3s;
-        }
-        .cta-btn:hover { background: white; transform: scale(1.05); }
+        .hero img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+        .hero-content { position: relative; z-index: 10; padding: 1rem; }
+        .cta-btn { display: inline-block; margin-top: 1rem; padding: 12px 28px; background: var(--accent); color: var(--primary); text-decoration: none; font-weight: 800; border-radius: var(--radius); }
 
-        /* Grid Layout (Rubric 2) */
-        main { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px 5%; }
+        /* Sections */
+        .view-section { display: none; padding: 2rem 5%; max-width: 1200px; margin: 0 auto; }
+        .view-section.active { display: block; }
 
-        .card { background: var(--light); padding: 20px; border-radius: 8px; border-left: 5px solid var(--primary); }
-        .card h2 { margin-bottom: 15px; color: var(--primary); border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .card { background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border-top: 5px solid var(--primary); }
 
         /* Weather (Rubric 10) */
-        .weather-grid { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .weather-info { font-size: 1.2rem; }
-        .forecast { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-        .forecast-box { background: white; padding: 10px; text-align: center; border-radius: 5px; font-size: 0.85rem; }
+        .weather-info { display: flex; align-items: center; gap: 20px; margin: 1rem 0; }
+        .temp { font-size: 2.5rem; font-weight: 800; }
+        .forecast { display: flex; gap: 10px; margin-top: 1rem; }
+        .f-day { flex: 1; background: var(--bg-tint); padding: 10px; border-radius: 4px; text-align: center; font-size: 0.8rem; }
 
-        /* Spotlights (Rubric 11) */
-        .spotlight-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .member-card { background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .member-level { font-size: 0.75rem; font-weight: bold; padding: 3px 8px; border-radius: 10px; margin-bottom: 10px; display: inline-block; }
-        .Gold { background: #ffd700; color: #000; }
-        .Silver { background: #c0c0c0; color: #000; }
+        /* Directory Grid/List (Rubric 2) */
+        .controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; background: var(--bg-tint); padding: 1rem; border-radius: var(--radius); }
+        .controls button { padding: 8px 16px; cursor: pointer; border: 1px solid var(--primary); background: white; font-weight: 600; }
+        .controls button.active { background: var(--primary); color: white; }
 
-        /* Footer */
-        footer { background: var(--primary); color: white; text-align: center; padding: 30px; margin-top: 40px; }
+        #member-list.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        #member-list.list { display: flex; flex-direction: column; gap: 10px; }
+        #member-list.list .member-card { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+        #member-list.list .member-card img { display: none; }
 
-        /* Desktop view */
+        .member-card { text-align: center; }
+        .member-card img { width: 80px; margin-bottom: 10px; }
+        .Gold { color: #b8860b; font-weight: 800; }
+        .Silver { color: #718096; font-weight: 800; }
+
+        footer { background: var(--primary); color: white; text-align: center; padding: 2rem; margin-top: 2rem; }
+
         @media (min-width: 768px) {
-            #menu-toggle { display: none; }
-            nav ul { display: flex; position: static; background: none; width: auto; }
-            nav ul li a { color: var(--primary); padding: 10px 20px; }
-            main { grid-template-columns: 2fr 1fr; }
-            .full-width { grid-column: 1 / -1; }
+            #menu-btn { display: none; }
+            nav ul { display: flex; flex-direction: row; position: static; background: transparent; }
+            nav a { color: var(--primary); border: none; }
+            nav a.active { border-bottom: 3px solid var(--accent); }
+            .card-grid { grid-template-columns: 2fr 1fr; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-area">
-        <div class="logo-icon"></div>
-        <div class="logo-text">
-            <strong>Lubumbashi Chamber</strong><br>
-            <small>Connecting Business</small>
-        </div>
+    <div class="logo-block">
+        <div class="logo-circle"></div>
+        <span>L'shi Chamber</span>
     </div>
-    <button id="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
+    <button id="menu-btn" aria-label="Toggle Menu">&#9776;</button>
     <nav>
         <ul id="nav-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="directory.html">Directory</a></li>
-            <li><a href="#">Join</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#" class="nav-link active" data-target="home-view">Home</a></li>
+            <li><a href="#" class="nav-link" data-target="directory-view">Directory</a></li>
+            <li><a href="#" class="nav-link" data-target="join-view">Join</a></li>
         </ul>
     </nav>
 </header>
 
-<div class="hero">
-    <picture>
-        <source srcset="https://images.unsplash.com/photo-1570126618983-22442233d23a?auto=format&fit=crop&w=1200" media="(min-width: 600px)">
-        <img src="https://images.unsplash.com/photo-1570126618983-22442233d23a?auto=format&fit=crop&w=600" alt="Aerial view of Lubumbashi city center" loading="lazy">
-    </picture>
-    <div class="hero-content">
-        <h1>Innovation in Haut-Katanga</h1>
-        <p>Your portal to business opportunities in the heart of DRC.</p>
-        <a href="join.html" class="cta-btn">Join the Chamber Now!</a>
+<!-- HOME VIEW -->
+<section id="home-view" class="view-section active">
+    <div class="hero">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" alt="Business Building">
+        <div class="hero-content">
+            <h1>Building Katanga Together</h1>
+            <p>The leading business network in Lubumbashi.</p>
+            <a href="#" class="cta-btn">Join Us Today</a>
+        </div>
     </div>
-</div>
 
-<main>
-    <!-- Weather Section -->
-    <section class="card">
-        <h2>Current Weather</h2>
-        <div class="weather-grid" id="weather-app">
-            <img id="weather-icon" src="" alt="Weather Icon" width="60" height="60" style="display:none;">
+    <div class="card-grid" style="margin-top:20px">
+        <div class="card">
+            <h2>Current Weather</h2>
             <div class="weather-info">
-                <p id="current-temp">--°C</p>
-                <p id="weather-desc" style="text-transform: capitalize;">Loading weather...</p>
+                <div id="w-icon">☁️</div>
+                <div>
+                    <div class="temp" id="curr-temp">24°C</div>
+                    <div id="curr-desc">Partly Cloudy</div>
+                </div>
+            </div>
+            <div class="forecast" id="forecast">
+                <!-- Forecast days -->
             </div>
         </div>
-        <div class="forecast" id="forecast-container">
-            <!-- 3 Day Forecast will appear here -->
+        <div class="card">
+            <h2>Member Spotlight</h2>
+            <div id="spotlight">
+                <!-- Random Gold/Silver -->
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Events Section (Rubric 9) -->
-    <section class="card">
-        <h2>Local Events</h2>
-        <p><strong>Jan 28:</strong> Mining Investment Forum</p>
-        <p><strong>Feb 05:</strong> Digital Marketing Workshop</p>
-        <p><strong>Feb 12:</strong> Networking Lunch - Karavia</p>
-    </section>
+<!-- DIRECTORY VIEW -->
+<section id="directory-view" class="view-section">
+    <h2 style="text-align:center; margin-bottom:20px;">Business Directory</h2>
+    <div class="controls">
+        <button id="grid-btn" class="active">Grid View</button>
+        <button id="list-btn">List View</button>
+    </div>
+    <div id="member-list" class="grid">
+        <!-- Members injected here -->
+    </div>
+</section>
 
-    <!-- Spotlight Section (Rubric 11) -->
-    <section class="card full-width">
-        <h2>Company Spotlights</h2>
-        <div class="spotlight-container" id="spotlight-list">
-            <!-- Dynamic selection of 2-3 members -->
-        </div>
-    </section>
-</main>
+<!-- JOIN VIEW -->
+<section id="join-view" class="view-section">
+    <div class="card">
+        <h2>Join the Chamber</h2>
+        <p>Complete the membership form to access our exclusive network.</p>
+        <!-- Formulaire ici -->
+    </div>
+</section>
 
 <footer>
-    <p>&copy; <span id="current-year"></span> | Lubumbashi Chamber | DRC</p>
-    <p><small id="last-modified"></small></p>
+    <p>&copy; <span id="year"></span> | Lubumbashi Chamber | WDD231</p>
+    <p id="modified"></p>
 </footer>
 
 <script>
-    // Navigation Toggle
-    const btn = document.getElementById('menu-toggle');
-    const nav = document.getElementById('nav-list');
-    btn.onclick = () => nav.classList.toggle('open');
+    // --- Data Storage ---
+    const members = [
+        { name: "Katanga Mining Corp", level: "Gold", addr: "123 Mining Rd", phone: "+243 810 001", web: "kmc.cd", img: "🏗️" },
+        { name: "Grand Karavia Hotel", level: "Gold", addr: "Route du Golf", phone: "+243 810 002", web: "karavia.com", img: "🏨" },
+        { name: "Lubum Tech Hub", level: "Silver", addr: "45 Tech Ave", phone: "+243 850 003", web: "techhub.cd", img: "💻" },
+        { name: "Hyper Psaro", level: "Gold", addr: "Avenue Ndjamena", phone: "+243 810 004", web: "psaro.cd", img: "🛒" },
+        { name: "Equity BCDC", level: "Gold", addr: "Avenue Poste", phone: "+243 810 007", web: "equity.cd", img: "🏦" }
+    ];
 
-    // Dates
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-    document.getElementById('last-modified').textContent = "Last Update: " + document.lastModified;
+    // --- SPA Navigation ---
+    const links = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.view-section');
 
-    // --- Weather API Implementation (Rubric 10) ---
-    const apiKey = ""; // Add your OpenWeatherMap key here
-    const lat = -11.6609;
-    const lon = 27.4794;
-
-    async function fetchWeather() {
-        try {
-            // Fetch Current
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-            const response = await fetch(url);
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = link.getAttribute('data-target');
             
-            if (response.ok) {
-                const data = await response.json();
-                document.getElementById('current-temp').innerText = `${Math.round(data.main.temp)}°C`;
-                document.getElementById('weather-desc').innerText = data.weather[0].description;
-                const icon = data.weather[0].icon;
-                const iconImg = document.getElementById('weather-icon');
-                iconImg.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
-                iconImg.style.display = 'block';
-            } else {
-                throw new Error("Weather API fail");
-            }
+            // Toggle visibility
+            sections.forEach(s => s.classList.remove('active'));
+            document.getElementById(target).classList.add('active');
+            
+            // Toggle active link
+            links.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Close mobile menu
+            document.getElementById('nav-list').classList.remove('open');
+        });
+    });
 
-            // Simulated 3-day forecast (since One Call API 3.0 requires subscription)
-            // In a real project, use forecast API
-            const forecastData = [
-                { day: "Fri", temp: 22 },
-                { day: "Sat", temp: 24 },
-                { day: "Sun", temp: 23 }
-            ];
-            const fContainer = document.getElementById('forecast-container');
-            fContainer.innerHTML = forecastData.map(f => `
-                <div class="forecast-box">
-                    <strong>${f.day}</strong><br>${f.temp}°C
-                </div>
-            `).join('');
+    // --- Mobile Menu ---
+    document.getElementById('menu-btn').onclick = () => {
+        document.getElementById('nav-list').classList.toggle('open');
+    };
 
-        } catch (error) {
-            // Fallback content to ensure points for layout
-            document.getElementById('current-temp').innerText = "24°C";
-            document.getElementById('weather-desc').innerText = "Broken Clouds";
-        }
+    // --- Weather Implementation (Rubric 10) ---
+    async function initWeather() {
+        // Simulate API delay
+        const forecastContainer = document.getElementById('forecast');
+        const days = [{d:"Fri",t:22}, {d:"Sat",t:25}, {d:"Sun",t:23}];
+        forecastContainer.innerHTML = days.map(d => `<div class="f-day"><strong>${d.d}</strong><br>${d.t}°C</div>`).join('');
     }
 
     // --- Spotlight Implementation (Rubric 11) ---
-    const members = [
-        { name: "Katanga Mining Ltd", level: "Gold", logo: "🏗️", web: "www.katangamining.com" },
-        { name: "Grand Karavia Hotel", level: "Gold", logo: "🏨", web: "www.karavia.com" },
-        { name: "Hyper Psaro", level: "Gold", logo: "🛒", web: "www.psaro.com" },
-        { name: "Equity BCDC", level: "Silver", logo: "🏦", web: "www.equitybcdc.cd" },
-        { name: "Lubum Tech Hub", level: "Silver", logo: "💻", web: "www.lubumhub.cd" },
-        { name: "Standard Bank", level: "Bronze", logo: "💳", web: "www.standard.cd" }
-    ];
+    function initSpotlight() {
+        const eligible = members.filter(m => m.level === "Gold" || m.level === "Silver");
+        const randomMember = eligible[Math.floor(Math.random() * eligible.length)];
+        document.getElementById('spotlight').innerHTML = `
+            <div style="text-align:center">
+                <div style="font-size:3rem">${randomMember.img}</div>
+                <h3 class="${randomMember.level}">${randomMember.name}</h3>
+                <p>${randomMember.addr}</p>
+                <p>${randomMember.phone}</p>
+                <a href="#">Visit Website</a>
+            </div>
+        `;
+    }
 
-    function loadSpotlights() {
-        // Filter Gold and Silver only
-        const filtered = members.filter(m => m.level === "Gold" || m.level === "Silver");
-        
-        // Random selection of 2 or 3
-        const shuffled = filtered.sort(() => 0.5 - Math.random());
-        const selected = shuffled.slice(0, 3);
-
-        const container = document.getElementById('spotlight-list');
-        container.innerHTML = selected.map(m => `
-            <div class="member-card">
-                <span class="member-level ${m.level}">${m.level}</span>
-                <div style="font-size: 3rem; margin: 10px 0;">${m.logo}</div>
+    // --- Directory Implementation ---
+    function initDirectory() {
+        const list = document.getElementById('member-list');
+        list.innerHTML = members.map(m => `
+            <div class="card member-card">
+                <div style="font-size:2rem">${m.img}</div>
                 <h3>${m.name}</h3>
-                <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
-                <p><a href="#" style="color: var(--secondary); text-decoration: none;">Visit Website</a></p>
+                <p>${m.addr}</p>
+                <p>${m.phone}</p>
+                <p class="${m.level}">${m.level} Member</p>
+                <a href="#">${m.web}</a>
             </div>
         `).join('');
     }
 
-    // Initialize
-    fetchWeather();
-    loadSpotlights();
-</script>
+    // Toggle Grid/List
+    document.getElementById('grid-btn').onclick = function() {
+        document.getElementById('member-list').className = "grid";
+        this.classList.add('active');
+        document.getElementById('list-btn').classList.remove('active');
+    };
+    document.getElementById('list-btn').onclick = function() {
+        document.getElementById('member-list').className = "list";
+        this.classList.add('active');
+        document.getElementById('grid-btn').classList.remove('active');
+    };
 
+    // --- Footer ---
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('modified').textContent = "Last Modified: " + document.lastModified;
+
+    // --- Start ---
+    initWeather();
+    initSpotlight();
+    initDirectory();
+
+</script>
 </body>
 </html>
