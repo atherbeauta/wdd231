@@ -3,130 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Directory | Lubumbashi Chamber</title>
-    <meta name="description" content="Business directory of the Lubumbashi Chamber of Commerce members.">
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Lubumbashi Chamber of Commerce | Portal</title>
+    <!-- Favicon placeholder -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
+    
     <style>
-        /* Styles spécifiques au Directory pour garantir un aspect Pro */
-        .directory-controls {
+        :root {
+            --primary: #1a365d;    /* Navy Blue */
+            --secondary: #2c5282;  /* Lighter Blue */
+            --accent: #d69e2e;     /* Gold */
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-body: #f7fafc;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: var(--primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            padding: 1rem;
-            background-color: var(--bg-tint); /* Trame bleutée */
-            border-radius: var(--radius);
+            border-radius: 8px;
         }
 
-        .directory-controls button {
-            padding: 0.8rem 1.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            border: 2px solid var(--secondary-blue);
-            background: white;
-            color: var(--primary-blue);
-            border-radius: 5px;
-            transition: 0.3s;
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
         }
 
-        .directory-controls button.active {
-            background: var(--primary-blue);
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--primary);
             color: white;
         }
 
-        /* Grid View */
-        #directory-container.grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+        #menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
         }
 
-        .grid .member-card {
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background: var(--primary);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .hero-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4; /* Overlay effect */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        
+        .btn-cta {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(214, 158, 46, 0.4); }
+
+        /* --- SECTIONS --- */
+        .page-section {
+            display: none;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- DIRECTORY STYLES --- */
+        .directory-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .view-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .view-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        #member-container.grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        #member-container.list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .member-card {
             background: white;
             padding: 1.5rem;
             border-radius: var(--radius);
-            text-align: center;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border);
+            border: 1px solid #edf2f7;
+            text-align: center;
+            transition: var(--transition);
         }
 
-        .grid .member-card img {
-            width: 100px;
-            height: auto;
+        .member-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+        .member-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
             margin-bottom: 1rem;
         }
 
-        /* List View */
-        #directory-container.list {
+        .member-card.list-item {
+            text-align: left;
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .list .member-card {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
             align-items: center;
-            padding: 1rem;
-            background: white;
-            border-bottom: 1px solid var(--border);
+            justify-content: space-between;
+            padding: 1rem 2rem;
         }
 
-        .list .member-card img { display: none; } /* Cacher images en liste */
-        .list .member-card h3 { font-size: 1rem; color: var(--primary-blue); }
+        .membership-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
 
+        .badge-Gold { background: #fef3c7; color: #92400e; }
+        .badge-Silver { background: #f3f4f6; color: #374151; }
+        .badge-Bronze { background: #ffedd5; color: #9a3412; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 5% 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #a0aec0;
+        }
+
+        /* --- MOBILE ADAPTATION --- */
         @media (max-width: 768px) {
-            .list .member-card {
-                grid-template-columns: 1fr;
-                text-align: left;
-                gap: 5px;
+            #menu-toggle { display: block; }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: var(--shadow);
+                padding: 1rem 0;
             }
+            nav ul.open { display: flex; }
+            .hero h1 { font-size: 1.8rem; }
+            .member-card.list-item { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-block">
-        <img src="images/kat.png" alt="Logo" width="50">
-        <div class="logo-text">
-            <h1>Lubumbashi</h1>
-            <p>Chamber of Commerce</p>
-        </div>
-    </div>
-    <button id="menu-btn" aria-label="Toggle Menu">&#9776;</button>
+    <a href="#" class="logo">
+        <div class="logo-icon">L</div>
+        <span>Lubumbashi Chamber</span>
+    </a>
+    
+    <button id="menu-toggle">☰</button>
+    
     <nav>
-        <ul id="nav-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="directory.html" class="active">Directory</a></li>
-            <li><a href="join.html">Join</a></li>
+        <ul id="nav-menu">
+            <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
+            <li><a href="#" class="nav-link" data-target="directory">Directory</a></li>
+            <li><a href="#" class="nav-link" data-target="join">Join</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
-    <section class="directory-header card">
-        <h2>Business Directory</h2>
-        <p>Explore our network of trusted local businesses and partners.</p>
+    <!-- HOME SECTION -->
+    <section id="home" class="page-section active">
+        <div class="hero">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" alt="Lubumbashi Business Center" class="hero-img">
+            <div class="hero-content">
+                <h1>Connecting Lubumbashi to the World</h1>
+                <p>Empowering local entrepreneurs and attracting global investments to the Copper Capital.</p>
+                <a href="#join" class="btn-cta">Start Your Membership</a>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="member-card" style="text-align: left;">
+                <h2 style="color:var(--primary); margin-bottom:1rem;">Local Business Spotlight</h2>
+                <div id="spotlight-content">
+                    <!-- Dynamic Spotlight content -->
+                </div>
+            </div>
+            <div class="member-card" style="text-align: left;">
+                <h2 style="color:var(--primary); margin-bottom:1rem;">Weather & Events</h2>
+                <p>📍 <strong>Lubumbashi, DRC</strong></p>
+                <p style="font-size: 2rem; font-weight: bold; margin: 10px 0;">26°C</p>
+                <p>Partly Cloudy - Humidity 45%</p>
+            </div>
+        </div>
     </section>
 
-    <div class="directory-controls">
-        <button id="grid-view" class="active">Grid View</button>
-        <button id="list-view">List View</button>
-    </div>
+    <!-- DIRECTORY SECTION -->
+    <section id="directory" class="page-section">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="font-size: 2rem; color: var(--primary);">Member Directory</h2>
+            <p style="color: var(--text-light);">Browse our network of verified business partners.</p>
+        </div>
 
-    <article id="directory-container" class="grid">
-        <!-- Members injected by directory.js -->
-    </article>
+        <div class="directory-controls">
+            <button class="view-btn active" id="grid-view">Grid Layout</button>
+            <button class="view-btn" id="list-view">List Layout</button>
+        </div>
+
+        <div id="member-container" class="grid">
+            <!-- Members will be injected here -->
+        </div>
+    </section>
+
+    <!-- JOIN SECTION -->
+    <section id="join" class="page-section">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Membership Levels</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div class="member-card">
+                    <h3 class="badge-Bronze" style="display: inline-block; margin-bottom: 10px;">Bronze</h3>
+                    <p>Standard Directory Listing</p>
+                </div>
+                <div class="member-card">
+                    <h3 class="badge-Silver" style="display: inline-block; margin-bottom: 10px;">Silver</h3>
+                    <p>Enhanced Profile + Events Access</p>
+                </div>
+                <div class="member-card">
+                    <h3 class="badge-Gold" style="display: inline-block; margin-bottom: 10px;">Gold</h3>
+                    <p>Full Exposure + VIP Spotlight</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <footer>
-    <p>&copy; <span id="currentyear"></span> Lubumbashi Chamber | WDD231</p>
-    <p id="lastModified"></p>
+    <div class="footer-grid">
+        <div>
+            <h3 style="margin-bottom: 15px;">Lubumbashi Chamber</h3>
+            <p>1240 Avenue de la Poste<br>Lubumbashi, DRC</p>
+        </div>
+        <div>
+            <h3 style="margin-bottom: 15px;">Contact</h3>
+            <p>Email: info@lshi-chamber.cd</p>
+            <p>Phone: +243 812 345 678</p>
+        </div>
+        <div>
+            <h3 style="margin-bottom: 15px;">Follow Us</h3>
+            <p>LinkedIn | Facebook | Twitter</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> Lubumbashi Chamber of Commerce | WDD 231 Project</p>
+        <p>Last Modified: <span id="lastModified"></span></p>
+    </div>
 </footer>
 
-<script src="scripts/directory.js"></script>
+<script>
+    // --- MEMBER DATA ---
+    const members = [
+        {
+            name: "Katanga Mining SA",
+            address: "Industrial Zone North",
+            phone: "+243 810 001 002",
+            website: "https://katangamining.cd",
+            image: "🏗️",
+            level: "Gold"
+        },
+        {
+            name: "Grand Karavia Hotel",
+            address: "Route du Golf",
+            phone: "+243 850 005 000",
+            website: "https://grandkaravia.com",
+            image: "🏨",
+            level: "Gold"
+        },
+        {
+            name: "L'shi Tech Solutions",
+            address: "45 Boulevard M'siri",
+            phone: "+243 990 123 456",
+            website: "https://lshitech.cd",
+            image: "💻",
+            level: "Silver"
+        },
+        {
+            name: "Congolese Bank Corp",
+            address: "Avenue Kilela Balanda",
+            phone: "+243 812 888 777",
+            website: "https://cbc-bank.cd",
+            image: "🏦",
+            level: "Gold"
+        },
+        {
+            name: "Fresh Katanga Farm",
+            address: "Kipushi Road",
+            phone: "+243 821 000 111",
+            website: "https://freshkatanga.com",
+            image: "🥬",
+            level: "Bronze"
+        },
+        {
+            name: "Blue Jet Logistics",
+            address: "Luano Airport Area",
+            phone: "+243 817 555 444",
+            website: "https://bluejet.cd",
+            image: "✈️",
+            level: "Silver"
+        }
+    ];
+
+    // --- NAVIGATION LOGIC ---
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.page-section');
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = link.getAttribute('data-target');
+
+            // UI Update
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+
+            sections.forEach(s => {
+                s.classList.remove('active');
+                if(s.id === target) s.classList.add('active');
+            });
+
+            // Close mobile menu
+            navMenu.classList.remove('open');
+            window.scrollTo(0,0);
+        });
+    });
+
+    menuToggle.onclick = () => navMenu.classList.toggle('open');
+
+    // --- DIRECTORY RENDERER ---
+    function displayMembers(viewType = 'grid') {
+        const container = document.getElementById('member-container');
+        container.className = viewType;
+        container.innerHTML = '';
+
+        members.forEach(member => {
+            const card = document.createElement('div');
+            card.className = viewType === 'grid' ? 'member-card' : 'member-card list-item';
+            
+            card.innerHTML = `
+                <div style="font-size: 3rem;">${member.image}</div>
+                <div>
+                    <h3 style="color:var(--primary);">${member.name}</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">${member.address}</p>
+                </div>
+                <div>
+                    <p><strong>${member.phone}</strong></p>
+                    <a href="${member.website}" target="_blank" style="color:var(--secondary); text-decoration:none; font-size:0.9rem;">Visit Website</a>
+                </div>
+                <span class="membership-badge badge-${member.level}">${member.level}</span>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // View Toggles
+    document.getElementById('grid-view').onclick = (e) => {
+        displayMembers('grid');
+        updateBtnState(e.target);
+    };
+    document.getElementById('list-view').onclick = (e) => {
+        displayMembers('list');
+        updateBtnState(e.target);
+    };
+
+    function updateBtnState(activeBtn) {
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+        activeBtn.classList.add('active');
+    }
+
+    // --- SPOTLIGHT LOGIC (Home Page) ---
+    function initSpotlight() {
+        const spotlightDiv = document.getElementById('spotlight-content');
+        // Filter Gold or Silver members only
+        const eligible = members.filter(m => m.level === 'Gold' || m.level === 'Silver');
+        const randomMember = eligible[Math.floor(Math.random() * eligible.length)];
+
+        spotlightDiv.innerHTML = `
+            <div style="text-align: center; background: #ebf4ff; padding: 20px; border-radius: 10px;">
+                <div style="font-size: 4rem; margin-bottom: 10px;">${randomMember.image}</div>
+                <h3>${randomMember.name}</h3>
+                <p style="margin: 10px 0;">"${randomMember.name} is a proud ${randomMember.level} partner supporting the growth of our local community."</p>
+                <span class="membership-badge badge-${randomMember.level}">${randomMember.level} Member</span>
+            </div>
+        `;
+    }
+
+    // --- FOOTER DATES ---
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    document.getElementById('lastModified').textContent = document.lastModified;
+
+    // Initialize
+    window.onload = () => {
+        displayMembers('grid');
+        initSpotlight();
+    };
+</script>
+
 </body>
 </html>
