@@ -1,57 +1,88 @@
-const membersUrl = "data/members.json";
-const container = document.querySelector("#members-container");
-const gridBtn = document.querySelector("#grid-view-btn");
-const listBtn = document.querySelector("#list-view-btn");
-const menuBtn = document.querySelector("#menu-btn");
-const navList = document.querySelector("#nav-list");
+/**
+ * Directory Script - WDD231
+ * Handles JSON fetching and Grid/List view switching
+ */
 
-// 1. Hamburger Menu Logic
-menuBtn.addEventListener("click", () => {
-    navList.classList.toggle("open");
-    menuBtn.classList.toggle("open");
-});
+const container = document.querySelector('#directory-container');
+const gridBtn = document.querySelector('#grid-view');
+const listBtn = document.querySelector('#list-view');
 
-// 2. Fetch JSON Data (Async/Await)
-async function fetchMembers() {
+// 1. Fetch JSON Data from your members.json file
+async function getMembers() {
     try {
-        const response = await fetch(membersUrl);
-        if (response.ok) {
-            const data = await response.json();
-            displayMembers(data.members);
+        // Path should match your project structure
+        const response = await fetch('data/members.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+        const data = await response.json();
+        displayMembers(data.members);
     } catch (error) {
-        console.error("Error loading data:", error);
+        console.error("Error fetching members:", error);
+        container.innerHTML = "<p>Failed to load directory data. Please try again later.</p>";
     }
 }
 
-// 3. Display Members
+// 2. Build the UI cards dynamically
 function displayMembers(members) {
-    container.innerHTML = "";
+    container.innerHTML = ""; // Clear the loading state
+
     members.forEach(member => {
-        const section = document.createElement("section");
+        const section = document.createElement('section');
+        section.className = 'member-card';
+
+        // Format tags as a comma-separated string
+        const tagsString = member.tags ? member.tags.join(', ') : '';
+
+        // Generate card content
         section.innerHTML = `
-            <img src="${member.image}" alt="${member.name} Logo" loading="lazy">
-            <h3>${member.name}</h3>
-            <p>${member.address}</p>
-            <p>${member.phone}</p>
-            <p><a href="${member.website}" target="_blank">Website</a></p>
-            <p><strong>Membership:</strong> ${member.membership}</p>
+            <img src="${member.image}" alt="${member.name} logo" loading="lazy">
+            <div class="member-info">
+                <h3>${member.name}</h3>
+                <p class="address">${member.address}</p>
+                <p class="phone">${member.phone}</p>
+                <p class="website"><a href="${member.website}" target="_blank">Visit Website</a></p>
+                <p class="membership-level"><strong>${member.membership}</strong></p>
+                <p class="tags"><small>${tagsString}</small></p>
+            </div>
         `;
         container.appendChild(section);
     });
 }
 
-// 4. View Toggles
-gridBtn.addEventListener("click", () => {
-    container.className = "grid-layout";
+// 3. View Toggle Logic (Grid vs List)
+gridBtn.addEventListener('click', () => {
+    container.classList.add('grid');
+    container.classList.remove('list');
+    gridBtn.classList.add('active');
+    listBtn.classList.remove('active');
 });
 
-listBtn.addEventListener("click", () => {
-    container.className = "list-layout";
+listBtn.addEventListener('click', () => {
+    container.classList.add('list');
+    container.classList.remove('grid');
+    listBtn.classList.add('active');
+    gridBtn.classList.remove('active');
 });
 
-// 5. Footer Info
-document.querySelector("#current-year").textContent = new Date().getFullYear();
-document.querySelector("#last-modified").textContent = `Last Modified: ${document.lastModified}`;
+// 4. Update Footer Information
+const yearSpan = document.querySelector('#currentyear');
+if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-fetchMembers();
+const lastModifiedSpan = document.querySelector('#lastModified');
+if (lastModifiedSpan) lastModifiedSpan.textContent = `Last Update: ${document.lastModified}`;
+
+// 5. Responsive Mobile Menu Toggle
+const menuBtn = document.querySelector('#menu-btn');
+const navList = document.querySelector('#nav-list');
+
+if (menuBtn && navList) {
+    menuBtn.addEventListener('click', () => {
+        navList.classList.toggle('open');
+        // Toggle icon between hamburger and X if desired
+        menuBtn.innerHTML = navList.classList.contains('open') ? '&#10006;' : '&#9776;';
+    });
+}
+
+// Initial Load
+getMembers();

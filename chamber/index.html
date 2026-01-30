@@ -3,56 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lubumbashi Chamber of Commerce - Directory</title>
-    <meta name="description" content="Business directory for the Lubumbashi Chamber of Commerce. Discover local businesses and partners.">
-    <link rel="icon" href="favicon.ico">
-    
-    <!-- CSS Files -->
+    <title>Home | Lubumbashi Chamber</title>
     <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/larger.css" media="(min-width: 768px)">
+    <link rel="stylesheet" href="styles/larger.css">
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <img src="images/chamber-logo.webp" alt="Chamber Logo" class="logo">
+        <div class="logo-container">
+            <img src="images/kat.png" alt="Logo" width="50">
             <h1>Lubumbashi Chamber</h1>
-            <button id="menu-button" title="Open Menu">☰</button>
         </div>
+        <button id="menu">≡</button>
         <nav>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+            <ul class="navigation">
+                <li><a href="index.html">Home</a></li>
                 <li><a href="directory.html">Directory</a></li>
-                <li><a href="join.html">Join Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Join</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="directory-controls">
-            <h2>Business Directory</h2>
-            <div class="view-buttons">
-                <button id="grid-view" title="Grid View">Grid Layout</button>
-                <button id="list-view" title="List View">List Layout</button>
-            </div>
+        <section class="hero">
+            <a href="join.html" class="cta-button">Join the Chamber Now!</a>
         </section>
 
-        <div id="member-container" class="grid-layout">
-            <!-- Data loaded via JavaScript -->
-            <p>Loading members...</p>
+        <div class="home-grid">
+            <section class="weather-info">
+                <h2>Current Weather</h2>
+                <div id="weather-card">Loading...</div>
+                <h3>3-Day Forecast</h3>
+                <div id="forecast"></div>
+            </section>
+
+            <section class="spotlights">
+                <h2>Member Spotlights</h2>
+                <div id="member-spotlights"></div>
+            </section>
         </div>
     </main>
 
     <footer>
-        <div class="footer-info">
-            <p>&copy; <span id="current-year"></span> Lubumbashi Chamber of Commerce</p>
-            <p>Athanase Kazadi Muamba</p>
-            <p id="last-modified"></p>
-        </div>
+        <p>&copy; <span id="currentyear"></span> Lubumbashi Chamber</p>
+        <p id="lastModified"></p>
     </footer>
 
     <script src="scripts/main.js"></script>
-    <script src="scripts/directory.js"></script>
-    <script src="scripts/chamber-logic.js" defer></script>
+    <script src="scripts/home.js"></script>
 </body>
 </html>

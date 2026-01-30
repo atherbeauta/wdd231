@@ -3,71 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Directory | Lubumbashi Chamber of Commerce</title>
-    <meta name="description" content="Official business directory of the Lubumbashi Chamber of Commerce. Explore our local partners and members.">
-    
-    <!-- CSS Files (shared with index.html) -->
+    <title>Member Directory | Lubumbashi Chamber</title>
+    <meta name="description" content="Business directory of the Lubumbashi Chamber of Commerce members.">
     <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/larger.css" media="(min-width: 768px)">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques au Directory pour garantir un aspect Pro */
+        .directory-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: var(--bg-tint); /* Trame bleutée */
+            border-radius: var(--radius);
+        }
+
+        .directory-controls button {
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid var(--secondary-blue);
+            background: white;
+            color: var(--primary-blue);
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .directory-controls button.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Grid View */
+        #directory-container.grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid .member-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .grid .member-card img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        /* List View */
+        #directory-container.list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .list .member-card {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .list .member-card img { display: none; } /* Cacher images en liste */
+        .list .member-card h3 { font-size: 1rem; color: var(--primary-blue); }
+
+        @media (max-width: 768px) {
+            .list .member-card {
+                grid-template-columns: 1fr;
+                text-align: left;
+                gap: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <img src="images/chamber-logo.webp" alt="Chamber Logo" class="logo">
-            <div class="header-text">
-                <h1>Lubumbashi Chamber</h1>
-                <p>Connecting Businesses in Haut-Katanga</p>
-            </div>
-            <button id="menu-button" aria-label="Toggle Menu">☰</button>
+
+<header>
+    <div class="logo-block">
+        <img src="images/kat.png" alt="Logo" width="50">
+        <div class="logo-text">
+            <h1>Lubumbashi</h1>
+            <p>Chamber of Commerce</p>
         </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="directory.html" class="active">Directory</a></li>
-                <li><a href="join.html">Join</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    </div>
+    <button id="menu-btn" aria-label="Toggle Menu">&#9776;</button>
+    <nav>
+        <ul id="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="directory.html" class="active">Directory</a></li>
+            <li><a href="join.html">Join</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
-        <section class="directory-header">
-            <h2>Member Directory</h2>
-            <p>Support our local businesses and find trusted partners.</p>
-            
-            <div class="view-controls">
-                <button id="grid-view" title="Display as Grid">Grid View</button>
-                <button id="list-view" title="Display as List">List View</button>
-            </div>
-        </section>
+<main>
+    <section class="directory-header card">
+        <h2>Business Directory</h2>
+        <p>Explore our network of trusted local businesses and partners.</p>
+    </section>
 
-        <!-- Member data will be injected here by directory.js -->
-        <div id="member-container" class="grid-layout">
-            <div class="loading-spinner">Fetching member data...</div>
-        </div>
-    </main>
+    <div class="directory-controls">
+        <button id="grid-view" class="active">Grid View</button>
+        <button id="list-view">List View</button>
+    </div>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-contact">
-                <h3>Lubumbashi Chamber</h3>
-                <p>123 Avenue de la Révolution</p>
-                <p>Lubumbashi, Haut-Katanga</p>
-                <p>Email: info@lushi-chamber.org</p>
-            </div>
-            <div class="footer-social">
-                <p>&copy; <span id="current-year"></span> | Lubumbashi Chamber | WDD 231 Project</p>
-                <p id="last-modified"></p>
-            </div>
-        </div>
-    </footer>
+    <article id="directory-container" class="grid">
+        <!-- Members injected by directory.js -->
+    </article>
+</main>
 
-    <!-- Script shared with index.html -->
-    <script src="scripts/main.js"></script>
-    <script src="scripts/directory.js"></script>
-    <script src="scripts/chamber-logic.js" defer></script>
+<footer>
+    <p>&copy; <span id="currentyear"></span> Lubumbashi Chamber | WDD231</p>
+    <p id="lastModified"></p>
+</footer>
+
+<script src="scripts/directory.js"></script>
 </body>
 </html>
