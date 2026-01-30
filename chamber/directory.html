@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lubumbashi Chamber of Commerce | Portal</title>
-    <!-- Favicon placeholder -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
     
     <style>
         :root {
-            --primary: #1a365d;    /* Navy Blue */
-            --secondary: #2c5282;  /* Lighter Blue */
-            --accent: #d69e2e;     /* Gold */
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #d69e2e;
             --text-dark: #2d3748;
             --text-light: #718096;
             --bg-body: #f7fafc;
             --white: #ffffff;
-            --transition: all 0.3s ease;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --shadow: 0 4px 6px rgba(0,0,0,0.05);
             --radius: 12px;
         }
@@ -24,13 +23,13 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-body);
             color: var(--text-dark);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- HEADER & NAV --- */
         header {
             background: var(--white);
             padding: 1rem 5%;
@@ -46,7 +45,7 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-weight: 800;
             font-size: 1.25rem;
             color: var(--primary);
@@ -56,26 +55,27 @@
         .logo-icon {
             background: var(--primary);
             color: white;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
+            border-radius: 10px;
+            font-size: 1.5rem;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 15px;
         }
 
         nav a {
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 8px;
             transition: var(--transition);
         }
 
@@ -84,58 +84,75 @@
             color: white;
         }
 
+        /* --- HAMBURGER BUTTON --- */
         #menu-toggle {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
             cursor: pointer;
-            color: var(--primary);
+            padding: 10px;
+            z-index: 1100;
+            width: 44px;
+            height: 44px;
+            position: relative;
         }
 
-        /* --- HERO SECTION --- */
+        .hamburger-box {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            position: absolute;
+            left: 10px;
+            transition: var(--transition);
+        }
+
+        .hamburger-box::before, .hamburger-box::after {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            position: absolute;
+            transition: var(--transition);
+        }
+
+        .hamburger-box::before { top: -8px; }
+        .hamburger-box::after { bottom: -8px; }
+
+        /* Animation à l'état ouvert */
+        #menu-toggle.open .hamburger-box { background: transparent; }
+        #menu-toggle.open .hamburger-box::before { transform: rotate(45deg); top: 0; }
+        #menu-toggle.open .hamburger-box::after { transform: rotate(-45deg); bottom: 0; }
+
+        /* --- HERO --- */
         .hero {
-            position: relative;
-            height: 400px;
+            height: 450px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200') center/cover;
             color: white;
             text-align: center;
-            background: var(--primary);
-            overflow: hidden;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .hero-img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4; /* Overlay effect */
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding: 0 20px;
-        }
-
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero-content { max-width: 800px; padding: 20px; }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1.5rem; }
         
         .btn-cta {
             display: inline-block;
             background: var(--accent);
             color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
+            padding: 15px 35px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 1rem;
             transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(214, 158, 46, 0.3);
         }
 
-        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(214, 158, 46, 0.4); }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(214, 158, 46, 0.5); }
 
         /* --- SECTIONS --- */
         .page-section {
@@ -143,133 +160,134 @@
             padding: 2rem 5%;
             max-width: 1200px;
             margin: 0 auto;
+            min-height: 60vh;
         }
 
-        .page-section.active {
-            display: block;
-            animation: fadeIn 0.4s ease-in-out;
-        }
+        .page-section.active { display: block; animation: slideIn 0.4s ease-out; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- DIRECTORY STYLES --- */
+        /* --- DIRECTORY --- */
         .directory-controls {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
+            gap: 15px;
+            margin-bottom: 3rem;
         }
 
         .view-btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: 2px solid var(--primary);
             background: white;
             color: var(--primary);
             cursor: pointer;
-            border-radius: 8px;
-            font-weight: bold;
+            border-radius: 30px;
+            font-weight: 700;
             transition: var(--transition);
         }
 
-        .view-btn.active {
-            background: var(--primary);
-            color: white;
-        }
+        .view-btn.active { background: var(--primary); color: white; }
 
         #member-container.grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         #member-container.list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .member-card {
             background: white;
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             border: 1px solid #edf2f7;
             text-align: center;
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
-        .member-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-
-        .member-card img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 1rem;
-        }
+        .member-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 
         .member-card.list-item {
             text-align: left;
-            display: flex;
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr auto;
             align-items: center;
-            justify-content: space-between;
-            padding: 1rem 2rem;
+            gap: 20px;
         }
 
         .membership-badge {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .badge-Gold { background: #fef3c7; color: #92400e; }
-        .badge-Silver { background: #f3f4f6; color: #374151; }
+        .badge-Silver { background: #e2e8f0; color: #475569; }
         .badge-Bronze { background: #ffedd5; color: #9a3412; }
 
         /* --- FOOTER --- */
         footer {
             background: var(--primary);
             color: white;
-            padding: 3rem 5% 1rem;
-            margin-top: 4rem;
+            padding: 4rem 5% 2rem;
+            margin-top: 5rem;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .footer-bottom {
             border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 1.5rem;
+            padding-top: 2rem;
             text-align: center;
-            font-size: 0.9rem;
-            color: #a0aec0;
+            font-size: 0.85rem;
+            opacity: 0.7;
         }
 
-        /* --- MOBILE ADAPTATION --- */
-        @media (max-width: 768px) {
+        /* --- MOBILE STYLES --- */
+        @media (max-width: 850px) {
             #menu-toggle { display: block; }
+
             nav ul {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--white);
                 flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: white;
-                box-shadow: var(--shadow);
-                padding: 1rem 0;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                transition: var(--transition);
+                z-index: 1050;
             }
-            nav ul.open { display: flex; }
-            .hero h1 { font-size: 1.8rem; }
-            .member-card.list-item { flex-direction: column; text-align: center; }
+
+            nav ul.open { right: 0; }
+
+            nav a { font-size: 1.5rem; width: 100%; text-align: center; }
+
+            .member-card.list-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -281,13 +299,15 @@
         <span>Lubumbashi Chamber</span>
     </a>
     
-    <button id="menu-toggle">☰</button>
+    <button id="menu-toggle" aria-label="Toggle Navigation">
+        <span class="hamburger-box"></span>
+    </button>
     
     <nav>
         <ul id="nav-menu">
-            <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
-            <li><a href="#" class="nav-link" data-target="directory">Directory</a></li>
-            <li><a href="#" class="nav-link" data-target="join">Join</a></li>
+            <li><a href="#" class="nav-link active" data-target="home">Accueil</a></li>
+            <li><a href="#" class="nav-link" data-target="directory">Répertoire</a></li>
+            <li><a href="#" class="nav-link" data-target="join">Nous rejoindre</a></li>
         </ul>
     </nav>
 </header>
@@ -296,63 +316,70 @@
     <!-- HOME SECTION -->
     <section id="home" class="page-section active">
         <div class="hero">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" alt="Lubumbashi Business Center" class="hero-img">
             <div class="hero-content">
-                <h1>Connecting Lubumbashi to the World</h1>
-                <p>Empowering local entrepreneurs and attracting global investments to the Copper Capital.</p>
-                <a href="#join" class="btn-cta">Start Your Membership</a>
+                <h1>Connecter Lubumbashi au Monde Entier</h1>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Accompagner la croissance économique de la capitale du cuivre à travers un réseau d'affaires puissant.</p>
+                <a href="#" class="btn-cta" data-target="join" onclick="navigateTo('join')">Devenir Membre</a>
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: -50px;">
             <div class="member-card" style="text-align: left;">
-                <h2 style="color:var(--primary); margin-bottom:1rem;">Local Business Spotlight</h2>
+                <h2 style="color:var(--primary); margin-bottom:1.5rem; border-left: 4px solid var(--accent); padding-left: 15px;">Spotlight Entreprise</h2>
                 <div id="spotlight-content">
-                    <!-- Dynamic Spotlight content -->
+                    <!-- Contenu dynamique -->
                 </div>
             </div>
             <div class="member-card" style="text-align: left;">
-                <h2 style="color:var(--primary); margin-bottom:1rem;">Weather & Events</h2>
-                <p>📍 <strong>Lubumbashi, DRC</strong></p>
-                <p style="font-size: 2rem; font-weight: bold; margin: 10px 0;">26°C</p>
-                <p>Partly Cloudy - Humidity 45%</p>
+                <h2 style="color:var(--primary); margin-bottom:1.5rem; border-left: 4px solid var(--accent); padding-left: 15px;">Météo & Localisation</h2>
+                <p>📍 <strong>Lubumbashi, RD Congo</strong></p>
+                <div style="display: flex; align-items: center; gap: 20px; margin: 20px 0;">
+                    <span style="font-size: 3rem;">☀️</span>
+                    <span style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">28°C</span>
+                </div>
+                <p style="color: var(--text-light);">Ensoleillé - Humidité 40%</p>
             </div>
         </div>
     </section>
 
     <!-- DIRECTORY SECTION -->
     <section id="directory" class="page-section">
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <h2 style="font-size: 2rem; color: var(--primary);">Member Directory</h2>
-            <p style="color: var(--text-light);">Browse our network of verified business partners.</p>
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; color: var(--primary);">Répertoire des Membres</h2>
+            <p style="color: var(--text-light); max-width: 600px; margin: 10px auto;">Retrouvez tous nos partenaires classés par secteurs d'activité.</p>
         </div>
 
         <div class="directory-controls">
-            <button class="view-btn active" id="grid-view">Grid Layout</button>
-            <button class="view-btn" id="list-view">List Layout</button>
+            <button class="view-btn active" id="grid-view">Grille</button>
+            <button class="view-btn" id="list-view">Liste</button>
         </div>
 
         <div id="member-container" class="grid">
-            <!-- Members will be injected here -->
+            <!-- Injecté par JS -->
         </div>
     </section>
 
     <!-- JOIN SECTION -->
     <section id="join" class="page-section">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Membership Levels</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">Formules d'Adhésion</h2>
+            <p style="margin-bottom: 3rem; color: var(--text-light);">Choisissez le niveau d'exposition qui correspond à vos objectifs.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
                 <div class="member-card">
-                    <h3 class="badge-Bronze" style="display: inline-block; margin-bottom: 10px;">Bronze</h3>
-                    <p>Standard Directory Listing</p>
+                    <h3 class="badge-Bronze" style="display: inline-block; margin-bottom: 15px;">Bronze</h3>
+                    <p style="margin-bottom: 20px;">Inscription standard au répertoire.</p>
+                    <button class="view-btn">S'inscrire</button>
                 </div>
-                <div class="member-card">
-                    <h3 class="badge-Silver" style="display: inline-block; margin-bottom: 10px;">Silver</h3>
-                    <p>Enhanced Profile + Events Access</p>
+                <div class="member-card" style="border-top: 5px solid var(--primary);">
+                    <h3 class="badge-Silver" style="display: inline-block; margin-bottom: 15px;">Silver</h3>
+                    <p style="margin-bottom: 20px;">Accès aux événements et profil enrichi.</p>
+                    <button class="view-btn">S'inscrire</button>
                 </div>
-                <div class="member-card">
-                    <h3 class="badge-Gold" style="display: inline-block; margin-bottom: 10px;">Gold</h3>
-                    <p>Full Exposure + VIP Spotlight</p>
+                <div class="member-card" style="border: 2px solid var(--accent);">
+                    <h3 class="badge-Gold" style="display: inline-block; margin-bottom: 15px;">Gold</h3>
+                    <p style="margin-bottom: 20px;">Visibilité VIP et mise en avant Spotlight.</p>
+                    <button class="view-btn active">S'inscrire</button>
                 </div>
             </div>
         </div>
@@ -362,172 +389,135 @@
 <footer>
     <div class="footer-grid">
         <div>
-            <h3 style="margin-bottom: 15px;">Lubumbashi Chamber</h3>
-            <p>1240 Avenue de la Poste<br>Lubumbashi, DRC</p>
+            <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Lubumbashi Chamber</h3>
+            <p>1240 Avenue de la Poste<br>Lubumbashi, Haut-Katanga, RDC</p>
         </div>
         <div>
-            <h3 style="margin-bottom: 15px;">Contact</h3>
-            <p>Email: info@lshi-chamber.cd</p>
-            <p>Phone: +243 812 345 678</p>
+            <h3 style="margin-bottom: 20px; font-size: 1.2rem;">Contact</h3>
+            <p>📧 info@lshi-chamber.cd</p>
+            <p>📞 +243 812 345 678</p>
         </div>
         <div>
-            <h3 style="margin-bottom: 15px;">Follow Us</h3>
-            <p>LinkedIn | Facebook | Twitter</p>
+            <h3 style="margin-bottom: 20px; font-size: 1.2rem;">Réseaux Sociaux</h3>
+            <p>LinkedIn | Facebook | X</p>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; <span id="currentYear"></span> Lubumbashi Chamber of Commerce | WDD 231 Project</p>
-        <p>Last Modified: <span id="lastModified"></span></p>
+        <p>&copy; <span id="currentYear"></span> Chambre de Commerce de Lubumbashi | Projet WDD 231</p>
+        <p>Dernière modification : <span id="lastModified"></span></p>
     </div>
 </footer>
 
 <script>
-    // --- MEMBER DATA ---
+    // --- DONNÉES ---
     const members = [
-        {
-            name: "Katanga Mining SA",
-            address: "Industrial Zone North",
-            phone: "+243 810 001 002",
-            website: "https://katangamining.cd",
-            image: "🏗️",
-            level: "Gold"
-        },
-        {
-            name: "Grand Karavia Hotel",
-            address: "Route du Golf",
-            phone: "+243 850 005 000",
-            website: "https://grandkaravia.com",
-            image: "🏨",
-            level: "Gold"
-        },
-        {
-            name: "L'shi Tech Solutions",
-            address: "45 Boulevard M'siri",
-            phone: "+243 990 123 456",
-            website: "https://lshitech.cd",
-            image: "💻",
-            level: "Silver"
-        },
-        {
-            name: "Congolese Bank Corp",
-            address: "Avenue Kilela Balanda",
-            phone: "+243 812 888 777",
-            website: "https://cbc-bank.cd",
-            image: "🏦",
-            level: "Gold"
-        },
-        {
-            name: "Fresh Katanga Farm",
-            address: "Kipushi Road",
-            phone: "+243 821 000 111",
-            website: "https://freshkatanga.com",
-            image: "🥬",
-            level: "Bronze"
-        },
-        {
-            name: "Blue Jet Logistics",
-            address: "Luano Airport Area",
-            phone: "+243 817 555 444",
-            website: "https://bluejet.cd",
-            image: "✈️",
-            level: "Silver"
-        }
+        { name: "Katanga Mining SA", address: "Z.I. Lubumbashi Nord", phone: "+243 810 001 002", website: "https://katangamining.cd", image: "🏗️", level: "Gold" },
+        { name: "Grand Karavia Hotel", address: "Route du Golf", phone: "+243 850 005 000", website: "https://grandkaravia.com", image: "🏨", level: "Gold" },
+        { name: "L'shi Tech Solutions", address: "45 Blvd M'siri", phone: "+243 990 123 456", website: "https://lshitech.cd", image: "💻", level: "Silver" },
+        { name: "Banque Centrale DRC", address: "Place de la Poste", phone: "+243 812 888 777", website: "https://bcc.cd", image: "🏦", level: "Gold" },
+        { name: "Agri-Katanga Farms", address: "Route de Kipushi", phone: "+243 821 000 111", website: "https://agrikat.cd", image: "🥬", level: "Bronze" }
     ];
 
-    // --- NAVIGATION LOGIC ---
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.page-section');
+    // --- NAVIGATION & MENU HAMBURGER ---
     const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.page-section');
+
+    function navigateTo(targetId) {
+        sections.forEach(s => s.classList.remove('active'));
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) targetSection.classList.add('active');
+
+        navLinks.forEach(l => {
+            l.classList.remove('active');
+            if(l.dataset.target === targetId) l.classList.add('active');
+        });
+
+        // Fermer le menu sur mobile
+        menuToggle.classList.remove('open');
+        navMenu.classList.remove('open');
+        window.scrollTo(0,0);
+    }
+
+    menuToggle.onclick = () => {
+        menuToggle.classList.toggle('open');
+        navMenu.classList.toggle('open');
+    };
 
     navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+        link.onclick = (e) => {
             e.preventDefault();
-            const target = link.getAttribute('data-target');
-
-            // UI Update
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-
-            sections.forEach(s => {
-                s.classList.remove('active');
-                if(s.id === target) s.classList.add('active');
-            });
-
-            // Close mobile menu
-            navMenu.classList.remove('open');
-            window.scrollTo(0,0);
-        });
+            navigateTo(link.dataset.target);
+        };
     });
 
-    menuToggle.onclick = () => navMenu.classList.toggle('open');
-
-    // --- DIRECTORY RENDERER ---
-    function displayMembers(viewType = 'grid') {
+    // --- DIRECTORY ---
+    function renderMembers(view = 'grid') {
         const container = document.getElementById('member-container');
-        container.className = viewType;
+        container.className = view;
         container.innerHTML = '';
 
-        members.forEach(member => {
+        members.forEach(m => {
             const card = document.createElement('div');
-            card.className = viewType === 'grid' ? 'member-card' : 'member-card list-item';
+            card.className = (view === 'grid') ? 'member-card' : 'member-card list-item';
             
             card.innerHTML = `
-                <div style="font-size: 3rem;">${member.image}</div>
+                <div style="font-size: 3rem;">${m.image}</div>
                 <div>
-                    <h3 style="color:var(--primary);">${member.name}</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light);">${member.address}</p>
+                    <h3 style="color:var(--primary);">${m.name}</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">${m.address}</p>
                 </div>
                 <div>
-                    <p><strong>${member.phone}</strong></p>
-                    <a href="${member.website}" target="_blank" style="color:var(--secondary); text-decoration:none; font-size:0.9rem;">Visit Website</a>
+                    <p><strong>${m.phone}</strong></p>
+                    <a href="${m.website}" target="_blank" style="color:var(--secondary); text-decoration:none; font-size:0.9rem;">Site Web</a>
                 </div>
-                <span class="membership-badge badge-${member.level}">${member.level}</span>
+                <div>
+                    <span class="membership-badge badge-${m.level}">${m.level}</span>
+                </div>
             `;
             container.appendChild(card);
         });
     }
 
-    // View Toggles
     document.getElementById('grid-view').onclick = (e) => {
-        displayMembers('grid');
-        updateBtnState(e.target);
-    };
-    document.getElementById('list-view').onclick = (e) => {
-        displayMembers('list');
-        updateBtnState(e.target);
+        renderMembers('grid');
+        updateButtons(e.target);
     };
 
-    function updateBtnState(activeBtn) {
+    document.getElementById('list-view').onclick = (e) => {
+        renderMembers('list');
+        updateButtons(e.target);
+    };
+
+    function updateButtons(btn) {
         document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-        activeBtn.classList.add('active');
+        btn.classList.add('active');
     }
 
-    // --- SPOTLIGHT LOGIC (Home Page) ---
-    function initSpotlight() {
-        const spotlightDiv = document.getElementById('spotlight-content');
-        // Filter Gold or Silver members only
-        const eligible = members.filter(m => m.level === 'Gold' || m.level === 'Silver');
-        const randomMember = eligible[Math.floor(Math.random() * eligible.length)];
+    // --- SPOTLIGHT ---
+    function setSpotlight() {
+        const spotlight = document.getElementById('spotlight-content');
+        const elite = members.filter(m => m.level === 'Gold');
+        const m = elite[Math.floor(Math.random() * elite.length)];
 
-        spotlightDiv.innerHTML = `
-            <div style="text-align: center; background: #ebf4ff; padding: 20px; border-radius: 10px;">
-                <div style="font-size: 4rem; margin-bottom: 10px;">${randomMember.image}</div>
-                <h3>${randomMember.name}</h3>
-                <p style="margin: 10px 0;">"${randomMember.name} is a proud ${randomMember.level} partner supporting the growth of our local community."</p>
-                <span class="membership-badge badge-${randomMember.level}">${randomMember.level} Member</span>
+        spotlight.innerHTML = `
+            <div style="background: #ebf4ff; padding: 25px; border-radius: 12px; text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 15px;">${m.image}</div>
+                <h3 style="color: var(--primary);">${m.name}</h3>
+                <p style="margin: 15px 0; font-style: italic;">Membre prestigieux de notre réseau, ${m.name} contribue activement au rayonnement de Lubumbashi.</p>
+                <span class="membership-badge badge-Gold">Gold Member</span>
             </div>
         `;
     }
 
-    // --- FOOTER DATES ---
+    // --- FOOTER & INIT ---
     document.getElementById('currentYear').textContent = new Date().getFullYear();
     document.getElementById('lastModified').textContent = document.lastModified;
 
-    // Initialize
     window.onload = () => {
-        displayMembers('grid');
-        initSpotlight();
+        renderMembers('grid');
+        setSpotlight();
     };
 </script>
 
