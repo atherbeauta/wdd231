@@ -1,91 +1,52 @@
-/* Color Harmony for Chamber of Commerce 
-   Focus: Balancing blue text with appropriate background tints (trames)
-*/
-
-:root {
-    /* Main Brand Colors */
-    --primary-blue: #1a3a5f;      /* Deep Blue for main headings */
-    --secondary-blue: #2c5282;    /* Medium Blue for sub-headings */
-    
-    /* Trames (Background Tints) */
-    --surface-light: #ffffff;     /* Pure white for card content */
-    --surface-tint: #f1f5f9;      /* Very light blue-grey for section backgrounds */
-    --surface-muted: #f8fafc;     /* Softest grey for the body background */
-    
-    /* Text Colors */
-    --text-dark: var(--primary-blue);
-    --text-body: #334155;         /* Dark blue-grey for readability */
-    --text-on-dark: #ffffff;
-    
-    /* Borders & Accents */
-    --border-light: #e2e8f0;
-    --accent-gold: #f6ad55;
-}
-
-/* Base Styles */
 body {
-    background-color: var(--surface-muted); /* Trame de fond globale */
-    color: var(--text-body);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #222;
 }
 
-/* Titles using the requested Blues */
-h1, h2 {
-    color: var(--primary-blue); /* Texte bleu profond */
-    margin-bottom: 1rem;
-}
-
-h3 {
-    color: var(--secondary-blue); /* Texte bleu moyen */
-}
-
-/* Grid layout with Trames */
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 2rem;
-}
-
-/* Card using a white "trame" to pop against the light grey background */
-.info-card {
-    background-color: var(--surface-light);
-    border: 1px solid var(--border-light);
-    border-top: 4px solid var(--primary-blue);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-/* Section with a subtle tinted "trame" */
-.highlight-section {
-    background-color: var(--surface-tint); /* Trame légèrement bleutée */
-    padding: 3rem 1rem;
-    text-align: center;
-    border-radius: 12px;
-    margin: 2rem 0;
-}
-
-/* Buttons for Contrast */
-.btn-primary {
-    background-color: var(--primary-blue);
+header, footer {
+    background: #003366;
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 1rem;
+}
+
+nav a {
+    color: white;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+.hero {
+    position: relative;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+}
+
+.cta {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: gold;
+    padding: 12px 20px;
+    text-decoration: none;
     font-weight: bold;
-    transition: background 0.3s;
+    color: black;
 }
 
-.btn-primary:hover {
-    background-color: var(--secondary-blue);
+section {
+    padding: 1.5rem;
 }
 
-footer {
-    background-color: var(--primary-blue);
-    color: white;
-    padding: 2rem;
-    margin-top: 3rem;
+.spotlight-cards {
+    display: grid;
+    gap: 1rem;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
 }

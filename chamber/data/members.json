@@ -1,67 +1,26 @@
-{
-  "members": [
-    {
-      "name": "Katanga Mining Corp",
-      "address": "123 Mining Road, Lubumbashi",
-      "phone": "+243 810 000 001",
-      "website": "https://example.com/kmc",
-      "image": "images/kat.png",
-      "membership": "Gold",
-      "tags": ["Mining", "Export"]
-    },
-    {
-      "name": "Grand Karavia Hotel",
-      "address": "Route du Golf, Lubumbashi",
-      "phone": "+243 810 000 002",
-      "website": "https://example.com/karavia",
-      "image": "images/kat.png",
-      "membership": "Gold",
-      "tags": ["Tourism", "Luxury"]
-    },
-    {
-      "name": "Lubum Tech Hub",
-      "address": "45 Tech Avenue, Lubumbashi",
-      "phone": "+243 850 000 003",
-      "website": "https://example.com/tech",
-      "image": "images/kat.png",
-      "membership": "Silver",
-      "tags": ["IT", "Innovation"]
-    },
-    {
-      "name": "Hyper Psaro",
-      "address": "Avenue Ndjamena, Lubumbashi",
-      "phone": "+243 810 000 004",
-      "website": "https://example.com/psaro",
-      "image": "images/kat.png",
-      "membership": "Gold",
-      "tags": ["Retail", "Logistics"]
-    },
-    {
-      "name": "Congo Bâtiment",
-      "address": "12 Likasi Road, Lubumbashi",
-      "phone": "+243 970 000 005",
-      "website": "https://example.com/cbat",
-      "image": "images/kat.png",
-      "membership": "Member",
-      "tags": ["Construction"]
-    },
-    {
-      "name": "L'Hacienda",
-      "address": "Golf District, Lubumbashi",
-      "phone": "+243 990 000 006",
-      "website": "https://example.com/hacienda",
-      "image": "images/kat.png",
-      "membership": "Silver",
-      "tags": ["Restaurant", "Service"]
-    },
-    {
-      "name": "Equity BCDC",
-      "address": "Avenue de la Poste, Lubumbashi",
-      "phone": "+243 810 000 007",
-      "website": "https://example.com/equity",
-      "image": "images/kat.png",
-      "membership": "Gold",
-      "tags": ["Banking", "Finance"]
-    }
-  ]
-}
+[
+  {
+    "name": "Alpha Construction",
+    "logo": "https://via.placeholder.com/200",
+    "phone": "+243 900 111 222",
+    "address": "Av. Industrielle 12, Lubumbashi",
+    "website": "https://example.com",
+    "membership": "gold"
+  },
+  {
+    "name": "Beta Technologies",
+    "logo": "https://via.placeholder.com/200",
+    "phone": "+243 900 333 444",
+    "address": "Rue Numérique 8, Lubumbashi",
+    "website": "https://example.org",
+    "membership": "silver"
+  },
+  {
+    "name": "Gamma Services",
+    "logo": "https://via.placeholder.com/200",
+    "phone": "+243 900 555 666",
+    "address": "Bd Commerce 45, Lubumbashi",
+    "website": "https://example.net",
+    "membership": "bronze"
+  }
+]

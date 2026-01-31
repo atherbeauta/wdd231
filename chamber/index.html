@@ -1,261 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lubumbashi Chamber of Commerce | Home</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
-    
-    <style>
-        :root {
-            --primary: #1a365d;
-            --secondary: #2c5282;
-            --accent: #d69e2e;
-            --white: #ffffff;
-            --bg-light: #f7fafc;
-            --text-dark: #2d3748;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+    <title>Lubumbashi Chamber of Commerce</title>
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta name="description" content="Chambre de commerce de Lubumbashi – soutenir les entreprises locales.">
+    <meta name="author" content="Kazadi Athanase Muamba">
 
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--white);
-        }
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e2.png">
 
-        /* --- Header & Navigation --- */
-        header {
-            background: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .logo-box {
-            background: var(--primary);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: var(--transition);
-        }
-
-        nav a:hover {
-            background: var(--bg-light);
-            color: var(--secondary);
-        }
-
-        /* --- Hamburger Button --- */
-        #menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1100;
-            width: 44px;
-            height: 44px;
-            position: relative;
-        }
-
-        .hamburger-icon {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--primary);
-            position: absolute;
-            left: 10px;
-            transition: var(--transition);
-        }
-
-        .hamburger-icon::before, .hamburger-icon::after {
-            content: '';
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--primary);
-            position: absolute;
-            transition: var(--transition);
-        }
-
-        .hamburger-icon::before { top: -8px; }
-        .hamburger-icon::after { bottom: -8px; }
-
-        /* Animation State */
-        #menu-toggle.open .hamburger-icon { background: transparent; }
-        #menu-toggle.open .hamburger-icon::before { transform: rotate(45deg); top: 0; }
-        #menu-toggle.open .hamburger-icon::after { transform: rotate(-45deg); bottom: 0; }
-
-        /* --- Sections --- */
-        section {
-            padding: 5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.8)), 
-                        url('https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&q=80&w=1200') center/cover;
-            color: white;
-            text-align: center;
-            padding: 8rem 5%;
-            max-width: 100%;
-        }
-
-        .hero h1 { font-size: 3rem; margin-bottom: 1.5rem; }
-        .btn-main {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 2rem;
-            transition: var(--transition);
-        }
-
-        .btn-main:hover { transform: scale(1.05); filter: brightness(1.1); }
-
-        /* --- Footer --- */
-        footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 3rem 5%;
-        }
-
-        /* --- Mobile Overlay Navigation --- */
-        @media (max-width: 768px) {
-            #menu-toggle { display: block; }
-
-            nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: var(--white);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: var(--transition);
-                z-index: 1050;
-            }
-
-            nav ul.active { right: 0; }
-
-            nav a { font-size: 1.3rem; padding: 15px 30px; width: 100%; text-align: center; }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/medium.css">
+    <link rel="stylesheet" href="styles/larger.css">
 </head>
+
 <body>
 
 <header>
-    <a href="index.html" class="logo">
-        <div class="logo-box">L</div>
-        <span>L'shi Chamber</span>
-    </a>
-
-    <button id="menu-toggle" aria-label="Open menu">
-        <span class="hamburger-icon"></span>
-    </button>
-
+    <h1>Lubumbashi Chamber</h1>
     <nav>
-        <ul id="nav-list">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="chamber/index.html">Répertoire</a></li>
-            <li><a href="#">Événements</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+        <a href="index.html">Accueil</a>
+        <a href="directory.html">Répertoire</a>
+        <a href="#">Événements</a>
+        <a href="#">Contact</a>
     </nav>
 </header>
 
+<!-- HERO IMAGE + CTA -->
+<section class="hero">
+    <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=1400" alt="Lubumbashi city">
+    <a class="cta" href="#">Rejoindre la Chambre</a>
+</section>
+
 <main>
-    <section class="hero">
-        <h1>Bâtir l'avenir de Lubumbashi</h1>
-        <p>Le carrefour stratégique pour les entreprises du Haut-Katanga.</p>
-        <a href="chamber/index.html" class="btn-main">Accéder au Répertoire</a>
+
+    <!-- CURRENT EVENTS -->
+    <section class="events">
+        <h2>Événements Actuels</h2>
+        <ul>
+            <li>📅 Forum Économique – 15 Février</li>
+            <li>🏢 Expo Business – 20 Février</li>
+            <li>📈 Conférence Innovation – 28 Février</li>
+        </ul>
     </section>
 
-    <section id="mission">
-        <h2 style="text-align:center; margin-bottom: 2rem; color: var(--primary);">Notre Mission</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
-            <div style="background: var(--bg-light); padding: 2rem; border-radius: 12px; border-bottom: 4px solid var(--accent);">
-                <h3>Réseautage</h3>
-                <p>Connectez-vous avec les leaders industriels de la région minière.</p>
-            </div>
-            <div style="background: var(--bg-light); padding: 2rem; border-radius: 12px; border-bottom: 4px solid var(--accent);">
-                <h3>Support</h3>
-                <p>Bénéficiez de conseils juridiques et fiscaux pour votre implantation.</p>
-            </div>
-            <div style="background: var(--bg-light); padding: 2rem; border-radius: 12px; border-bottom: 4px solid var(--accent);">
-                <h3>Innovation</h3>
-                <p>Participez à la transformation numérique du commerce local.</p>
-            </div>
+    <!-- WEATHER -->
+    <section class="weather">
+        <h2>Météo à Lubumbashi</h2>
+        <div id="weather-content">
+            <p>Chargement...</p>
         </div>
     </section>
+
+    <!-- COMPANY SPOTLIGHT -->
+    <section class="spotlights">
+        <h2>Membres à l’Honneur</h2>
+        <div class="spotlight-cards" id="spotlight-cards"></div>
+    </section>
+
 </main>
 
 <footer>
-    <p>&copy; <span id="year"></span> Lubumbashi Chamber of Commerce</p>
-    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;">Last Modified: <span id="last-mod"></span></p>
+    <p>© 2026 Lubumbashi Chamber of Commerce</p>
+    <p id="lastModified"></p>
 </footer>
 
 <script>
-    // Toggle mobile menu
-    const menuBtn = document.getElementById('menu-toggle');
-    const navList = document.getElementById('nav-list');
+/* Last Modified */
+document.getElementById("lastModified").textContent =
+    "Dernière modification : " + document.lastModified;
 
-    menuBtn.addEventListener('click', () => {
-        menuBtn.classList.toggle('open');
-        navList.classList.toggle('active');
+/* WEATHER API */
+const apiKey = "db06646f64189b6479877366aba5a0a2";
+const city = "Lubumbashi,CD";
+const weatherURL =
+`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+
+async function loadWeather() {
+    try {
+        const response = await fetch(weatherURL);
+        const data = await response.json();
+
+        const current = data.list[0];
+        const temp = current.main.temp;
+        const desc = current.weather[0].description;
+
+        let forecastHTML = "<h3>Prévisions 3 jours</h3>";
+
+        for (let i = 1; i <= 3; i++) {
+            const day = data.list[i * 8];
+            const date = new Date(day.dt_txt).toLocaleDateString("fr-FR", { weekday: "long" });
+            forecastHTML += `<p>${date} : ${day.main.temp}°C – ${day.weather[0].description}</p>`;
+        }
+
+        document.getElementById("weather-content").innerHTML = `
+            <p><strong>${temp.toFixed(1)}°C</strong> – ${desc}</p>
+            ${forecastHTML}
+        `;
+    } catch (error) {
+        document.getElementById("weather-content").textContent =
+            "Erreur lors du chargement météo.";
+    }
+}
+loadWeather();
+
+/* SPOTLIGHTS */
+async function loadSpotlights() {
+    const response = await fetch("data/members.json");
+    const members = await response.json();
+
+    const qualified = members.filter(m =>
+        m.membership === "gold" || m.membership === "silver"
+    );
+
+    qualified.sort(() => 0.5 - Math.random());
+
+    const selected = qualified.slice(0, 3);
+    const container = document.getElementById("spotlight-cards");
+
+    selected.forEach(member => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        card.innerHTML = `
+            <img src="${member.logo}" alt="${member.name}">
+            <h3>${member.name}</h3>
+            <p>Niveau : ${member.membership}</p>
+            <p>${member.phone}</p>
+            <p>${member.address}</p>
+            <a href="${member.website}" target="_blank">Site Web</a>
+        `;
+        container.appendChild(card);
     });
-
-    // Fermer le menu si on clique sur un lien (utile sur mobile)
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            menuBtn.classList.remove('open');
-            navList.classList.remove('active');
-        });
-    });
-
-    // Footer dynamic data
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('last-mod').textContent = document.lastModified;
+}
+loadSpotlights();
 </script>
 
 </body>
