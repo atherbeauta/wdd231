@@ -20,7 +20,7 @@
 <header>
     <div class="header-top">
         <h1>Lubumbashi Chamber</h1>
-        <button id="menuBtn" aria-label="Navigation Menu">&#9776;</button>
+        <button id="menuBtn" aria-label="Toggle menu">&#9776;</button>
     </div>
     <nav id="navMenu">
         <a href="index.html">Home</a>
@@ -32,7 +32,7 @@
 
 <section class="hero">
     <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=1400"
-         alt="City of Lubumbashi">
+         alt="Lubumbashi city view">
     <a href="#" class="cta">Join the Chamber</a>
 </section>
 
@@ -49,7 +49,7 @@
 
 <section>
     <h2>Weather in Lubumbashi</h2>
-    <div id="weather">Loading…</div>
+    <div id="weather">Loading weather data...</div>
 </section>
 
 <section>
@@ -65,26 +65,29 @@
 </footer>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
 
-    // LAST MODIFIED
+    /* Last Modified */
     document.getElementById("lastModified").textContent =
         "Last Modified: " + document.lastModified;
 
-    // HAMBURGER MENU
-    const menuBtn = document.getElementById("menuBtn");
-    const navMenu = document.getElementById("navMenu");
-    menuBtn.addEventListener("click", () => {
-        navMenu.classList.toggle("open");
+    /* Hamburger menu */
+    const btn = document.getElementById("menuBtn");
+    const nav = document.getElementById("navMenu");
+    btn.addEventListener("click", () => {
+        nav.classList.toggle("open");
     });
 
-    // WEATHER API
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Lubumbashi,CD&units=metric&appid=db06646f64189b6479877366aba5a0a2`)
-        .then(res => res.json())
+    /* Weather */
+    const apiKey = "db06646f64189b6479877366aba5a0a2";
+    const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=Lubumbashi,CD&units=metric&appid=${apiKey}`;
+
+    fetch(weatherURL)
+        .then(response => response.json())
         .then(data => {
             const now = data.list[0];
             let html = `<p><strong>${now.main.temp.toFixed(1)}°C</strong> – ${now.weather[0].description}</p>`;
-            html += "<h3>3 Day Forecast</h3>";
+            html += "<h3>3-Day Forecast</h3>";
             for (let i = 1; i <= 3; i++) {
                 const d = data.list[i * 8];
                 const date = new Date(d.dt_txt).toLocaleDateString("en-US", { weekday: "long" });
@@ -92,19 +95,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             document.getElementById("weather").innerHTML = html;
         })
-        .catch(() => document.getElementById("weather").textContent = "Weather unavailable.");
+        .catch(() => {
+            document.getElementById("weather").textContent = "Weather unavailable.";
+        });
 
-    // SPOTLIGHT
+    /* Spotlights */
     fetch("data/members.json")
         .then(res => res.json())
         .then(members => {
-            const qualified = members.filter(m =>
-                ["gold", "silver"].includes(m.membership.toLowerCase())
+            const filtered = members.filter(m =>
+                m.membership === "gold" || m.membership === "silver"
             );
-            qualified.sort(() => 0.5 - Math.random());
-            const display = qualified.slice(0, 3);
+            filtered.sort(() => Math.random() - 0.5);
+            const chosen = filtered.slice(0, 3);
+
             const container = document.getElementById("spotlights");
-            display.forEach(m => {
+            chosen.forEach(m => {
                 container.innerHTML += `
                 <div class="card">
                     <img src="${m.logo}" alt="${m.name}">
