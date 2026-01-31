@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Lubumbashi Chamber of Commerce</title>
-<meta name="description" content="Official website of the Lubumbashi Chamber of Commerce">
+<meta name="description" content="Official Chamber of Commerce page for businesses in Lubumbashi">
 <meta name="author" content="Kazadi Athanase Muamba">
 
 <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e2.png">
@@ -20,10 +20,9 @@
 <header>
     <div class="header-top">
         <h1>Lubumbashi Chamber</h1>
-        <button id="menuBtn" aria-label="Open navigation menu">&#9776;</button>
+        <button id="menuBtn" aria-label="Navigation Menu">&#9776;</button>
     </div>
-
-    <nav id="primaryNav">
+    <nav id="navMenu">
         <a href="index.html">Home</a>
         <a href="directory.html">Directory</a>
         <a href="#">Events</a>
@@ -31,35 +30,31 @@
     </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
     <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=1400"
-         alt="Lubumbashi city view">
+         alt="City of Lubumbashi">
     <a href="#" class="cta">Join the Chamber</a>
 </section>
 
 <main>
 
-<!-- CURRENT EVENTS -->
 <section>
     <h2>Current Events</h2>
     <ul>
-        <li>📅 Economic Forum – February 15</li>
-        <li>🏢 Business Expo – February 20</li>
-        <li>📈 Innovation Conference – February 28</li>
+        <li>Economic Forum – February 15</li>
+        <li>Business Expo – February 20</li>
+        <li>Innovation Conference – February 28</li>
     </ul>
 </section>
 
-<!-- WEATHER -->
 <section>
     <h2>Weather in Lubumbashi</h2>
-    <div id="weather">Loading weather data...</div>
+    <div id="weather">Loading…</div>
 </section>
 
-<!-- SPOTLIGHT -->
 <section>
     <h2>Member Spotlights</h2>
-    <div class="spotlights" id="spotlights"></div>
+    <div id="spotlights" class="spotlights"></div>
 </section>
 
 </main>
@@ -70,66 +65,57 @@
 </footer>
 
 <script>
-/* HAMBURGER MENU */
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.getElementById("primaryNav");
+document.addEventListener("DOMContentLoaded", () => {
 
-menuBtn.addEventListener("click", () => {
-    nav.classList.toggle("open");
-});
+    // LAST MODIFIED
+    document.getElementById("lastModified").textContent =
+        "Last Modified: " + document.lastModified;
 
-/* LAST MODIFIED */
-document.getElementById("lastModified").textContent =
-    "Last Modified: " + document.lastModified;
-
-/* WEATHER API */
-const apiKey = "db06646f64189b6479877366aba5a0a2";
-const weatherURL =
-`https://api.openweathermap.org/data/2.5/forecast?q=Lubumbashi,CD&units=metric&appid=${apiKey}`;
-
-async function loadWeather() {
-    const response = await fetch(weatherURL);
-    const data = await response.json();
-
-    const current = data.list[0];
-    let html = `<p><strong>${current.main.temp.toFixed(1)}°C</strong> – ${current.weather[0].description}</p>`;
-    html += "<h3>3-Day Forecast</h3>";
-
-    for (let i = 1; i <= 3; i++) {
-        const day = data.list[i * 8];
-        const date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: "long" });
-        html += `<p>${date}: ${day.main.temp}°C</p>`;
-    }
-
-    document.getElementById("weather").innerHTML = html;
-}
-loadWeather();
-
-/* COMPANY SPOTLIGHTS */
-async function loadSpotlights() {
-    const response = await fetch("data/members.json");
-    const members = await response.json();
-
-    const qualified = members.filter(m =>
-        m.membership === "gold" || m.membership === "silver"
-    );
-
-    qualified.sort(() => 0.5 - Math.random());
-
-    const container = document.getElementById("spotlights");
-
-    qualified.slice(0, 3).forEach(member => {
-        container.innerHTML += `
-        <div class="card">
-            <img src="${member.logo}" alt="${member.name}">
-            <h3>${member.name}</h3>
-            <p>${member.phone}</p>
-            <p>${member.address}</p>
-            <a href="${member.website}" target="_blank">Visit Website</a>
-        </div>`;
+    // HAMBURGER MENU
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+    menuBtn.addEventListener("click", () => {
+        navMenu.classList.toggle("open");
     });
-}
-loadSpotlights();
+
+    // WEATHER API
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Lubumbashi,CD&units=metric&appid=db06646f64189b6479877366aba5a0a2`)
+        .then(res => res.json())
+        .then(data => {
+            const now = data.list[0];
+            let html = `<p><strong>${now.main.temp.toFixed(1)}°C</strong> – ${now.weather[0].description}</p>`;
+            html += "<h3>3 Day Forecast</h3>";
+            for (let i = 1; i <= 3; i++) {
+                const d = data.list[i * 8];
+                const date = new Date(d.dt_txt).toLocaleDateString("en-US", { weekday: "long" });
+                html += `<p>${date}: ${d.main.temp}°C</p>`;
+            }
+            document.getElementById("weather").innerHTML = html;
+        })
+        .catch(() => document.getElementById("weather").textContent = "Weather unavailable.");
+
+    // SPOTLIGHT
+    fetch("data/members.json")
+        .then(res => res.json())
+        .then(members => {
+            const qualified = members.filter(m =>
+                ["gold", "silver"].includes(m.membership.toLowerCase())
+            );
+            qualified.sort(() => 0.5 - Math.random());
+            const display = qualified.slice(0, 3);
+            const container = document.getElementById("spotlights");
+            display.forEach(m => {
+                container.innerHTML += `
+                <div class="card">
+                    <img src="${m.logo}" alt="${m.name}">
+                    <h3>${m.name}</h3>
+                    <p>${m.phone}</p>
+                    <p>${m.address}</p>
+                    <a href="${m.website}" target="_blank">Visit Website</a>
+                </div>`;
+            });
+        });
+});
 </script>
 
 </body>

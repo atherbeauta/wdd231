@@ -4,20 +4,38 @@ body {
     color: #222;
 }
 
-header, footer {
+header {
     background: #003366;
     color: white;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 1rem;
+}
+
+#menuBtn {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+}
+
+nav {
+    display: none;
+    flex-direction: column;
+}
+
+nav.open {
+    display: flex;
 }
 
 nav a {
     color: white;
-    margin-right: 1rem;
     text-decoration: none;
-}
-
-.hero {
-    position: relative;
+    padding: 0.8rem;
 }
 
 .hero img {
@@ -32,15 +50,15 @@ nav a {
     background: gold;
     padding: 12px 20px;
     text-decoration: none;
-    font-weight: bold;
     color: black;
+    font-weight: bold;
 }
 
 section {
     padding: 1.5rem;
 }
 
-.spotlight-cards {
+.spotlights {
     display: grid;
     gap: 1rem;
 }
