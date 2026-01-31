@@ -1,63 +1,66 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lubumbashi Chamber of Commerce</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Chambre de commerce de Lubumbashi – soutenir les entreprises locales.">
-    <meta name="author" content="Kazadi Athanase Muamba">
+<title>Lubumbashi Chamber of Commerce</title>
+<meta name="description" content="Official website of the Lubumbashi Chamber of Commerce">
+<meta name="author" content="Kazadi Athanase Muamba">
 
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e2.png">
+<link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e2.png">
 
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/medium.css">
-    <link rel="stylesheet" href="styles/larger.css">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/medium.css">
+<link rel="stylesheet" href="styles/larger.css">
 </head>
 
 <body>
 
 <header>
-    <h1>Lubumbashi Chamber</h1>
-    <nav>
-        <a href="index.html">Accueil</a>
-        <a href="directory.html">Répertoire</a>
-        <a href="#">Événements</a>
+    <div class="header-top">
+        <h1>Lubumbashi Chamber</h1>
+        <button id="menuBtn" aria-label="Open navigation menu">&#9776;</button>
+    </div>
+
+    <nav id="primaryNav">
+        <a href="index.html">Home</a>
+        <a href="directory.html">Directory</a>
+        <a href="#">Events</a>
         <a href="#">Contact</a>
     </nav>
 </header>
 
-<!-- HERO IMAGE + CTA -->
+<!-- HERO -->
 <section class="hero">
-    <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=1400" alt="Lubumbashi city">
-    <a class="cta" href="#">Rejoindre la Chambre</a>
+    <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=1400"
+         alt="Lubumbashi city view">
+    <a href="#" class="cta">Join the Chamber</a>
 </section>
 
 <main>
 
-    <!-- CURRENT EVENTS -->
-    <section class="events">
-        <h2>Événements Actuels</h2>
-        <ul>
-            <li>📅 Forum Économique – 15 Février</li>
-            <li>🏢 Expo Business – 20 Février</li>
-            <li>📈 Conférence Innovation – 28 Février</li>
-        </ul>
-    </section>
+<!-- CURRENT EVENTS -->
+<section>
+    <h2>Current Events</h2>
+    <ul>
+        <li>📅 Economic Forum – February 15</li>
+        <li>🏢 Business Expo – February 20</li>
+        <li>📈 Innovation Conference – February 28</li>
+    </ul>
+</section>
 
-    <!-- WEATHER -->
-    <section class="weather">
-        <h2>Météo à Lubumbashi</h2>
-        <div id="weather-content">
-            <p>Chargement...</p>
-        </div>
-    </section>
+<!-- WEATHER -->
+<section>
+    <h2>Weather in Lubumbashi</h2>
+    <div id="weather">Loading weather data...</div>
+</section>
 
-    <!-- COMPANY SPOTLIGHT -->
-    <section class="spotlights">
-        <h2>Membres à l’Honneur</h2>
-        <div class="spotlight-cards" id="spotlight-cards"></div>
-    </section>
+<!-- SPOTLIGHT -->
+<section>
+    <h2>Member Spotlights</h2>
+    <div class="spotlights" id="spotlights"></div>
+</section>
 
 </main>
 
@@ -67,45 +70,42 @@
 </footer>
 
 <script>
-/* Last Modified */
+/* HAMBURGER MENU */
+const menuBtn = document.getElementById("menuBtn");
+const nav = document.getElementById("primaryNav");
+
+menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("open");
+});
+
+/* LAST MODIFIED */
 document.getElementById("lastModified").textContent =
-    "Dernière modification : " + document.lastModified;
+    "Last Modified: " + document.lastModified;
 
 /* WEATHER API */
 const apiKey = "db06646f64189b6479877366aba5a0a2";
-const city = "Lubumbashi,CD";
 const weatherURL =
-`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+`https://api.openweathermap.org/data/2.5/forecast?q=Lubumbashi,CD&units=metric&appid=${apiKey}`;
 
 async function loadWeather() {
-    try {
-        const response = await fetch(weatherURL);
-        const data = await response.json();
+    const response = await fetch(weatherURL);
+    const data = await response.json();
 
-        const current = data.list[0];
-        const temp = current.main.temp;
-        const desc = current.weather[0].description;
+    const current = data.list[0];
+    let html = `<p><strong>${current.main.temp.toFixed(1)}°C</strong> – ${current.weather[0].description}</p>`;
+    html += "<h3>3-Day Forecast</h3>";
 
-        let forecastHTML = "<h3>Prévisions 3 jours</h3>";
-
-        for (let i = 1; i <= 3; i++) {
-            const day = data.list[i * 8];
-            const date = new Date(day.dt_txt).toLocaleDateString("fr-FR", { weekday: "long" });
-            forecastHTML += `<p>${date} : ${day.main.temp}°C – ${day.weather[0].description}</p>`;
-        }
-
-        document.getElementById("weather-content").innerHTML = `
-            <p><strong>${temp.toFixed(1)}°C</strong> – ${desc}</p>
-            ${forecastHTML}
-        `;
-    } catch (error) {
-        document.getElementById("weather-content").textContent =
-            "Erreur lors du chargement météo.";
+    for (let i = 1; i <= 3; i++) {
+        const day = data.list[i * 8];
+        const date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: "long" });
+        html += `<p>${date}: ${day.main.temp}°C</p>`;
     }
+
+    document.getElementById("weather").innerHTML = html;
 }
 loadWeather();
 
-/* SPOTLIGHTS */
+/* COMPANY SPOTLIGHTS */
 async function loadSpotlights() {
     const response = await fetch("data/members.json");
     const members = await response.json();
@@ -116,22 +116,17 @@ async function loadSpotlights() {
 
     qualified.sort(() => 0.5 - Math.random());
 
-    const selected = qualified.slice(0, 3);
-    const container = document.getElementById("spotlight-cards");
+    const container = document.getElementById("spotlights");
 
-    selected.forEach(member => {
-        const card = document.createElement("div");
-        card.classList.add("card");
-
-        card.innerHTML = `
+    qualified.slice(0, 3).forEach(member => {
+        container.innerHTML += `
+        <div class="card">
             <img src="${member.logo}" alt="${member.name}">
             <h3>${member.name}</h3>
-            <p>Niveau : ${member.membership}</p>
             <p>${member.phone}</p>
             <p>${member.address}</p>
-            <a href="${member.website}" target="_blank">Site Web</a>
-        `;
-        container.appendChild(card);
+            <a href="${member.website}" target="_blank">Visit Website</a>
+        </div>`;
     });
 }
 loadSpotlights();

@@ -3,7 +3,7 @@
     "name": "Alpha Construction",
     "logo": "https://via.placeholder.com/200",
     "phone": "+243 900 111 222",
-    "address": "Av. Industrielle 12, Lubumbashi",
+    "address": "12 Industrial Ave, Lubumbashi",
     "website": "https://example.com",
     "membership": "gold"
   },
@@ -11,7 +11,7 @@
     "name": "Beta Technologies",
     "logo": "https://via.placeholder.com/200",
     "phone": "+243 900 333 444",
-    "address": "Rue Numérique 8, Lubumbashi",
+    "address": "8 Digital Street, Lubumbashi",
     "website": "https://example.org",
     "membership": "silver"
   },
@@ -19,7 +19,7 @@
     "name": "Gamma Services",
     "logo": "https://via.placeholder.com/200",
     "phone": "+243 900 555 666",
-    "address": "Bd Commerce 45, Lubumbashi",
+    "address": "45 Commerce Blvd, Lubumbashi",
     "website": "https://example.net",
     "membership": "bronze"
   }
