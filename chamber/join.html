@@ -42,7 +42,8 @@
              name="orgtitle"
              title="Organizational Title"
              autocomplete="organization-title"
-             pattern="[A-Za-z\s\-]{7,}">
+             pattern="[A-Za-z\s\-]{7,}"
+             required>
     </label>
 
     <label>
@@ -98,22 +99,22 @@
   <section class="membership-cards">
     <div class="card animate">
       <h3>NP Membership</h3>
-      <a href="#" data-modal="npModal">View Benefits</a>
+      <button type="button" data-modal="npModal">View Benefits</button>
     </div>
 
     <div class="card animate">
       <h3>Bronze Membership</h3>
-      <a href="#" data-modal="bronzeModal">View Benefits</a>
+      <button type="button" data-modal="bronzeModal">View Benefits</button>
     </div>
 
     <div class="card animate">
       <h3>Silver Membership</h3>
-      <a href="#" data-modal="silverModal">View Benefits</a>
+      <button type="button" data-modal="silverModal">View Benefits</button>
     </div>
 
     <div class="card animate">
       <h3>Gold Membership</h3>
-      <a href="#" data-modal="goldModal">View Benefits</a>
+      <button type="button" data-modal="goldModal">View Benefits</button>
     </div>
   </section>
 </main>
@@ -122,25 +123,25 @@
 <dialog id="npModal">
   <h2>NP Membership</h2>
   <p>No cost. Access to networking events and basic directory listing.</p>
-  <button>Close</button>
+  <button onclick="this.closest('dialog').close()">Close</button>
 </dialog>
 
 <dialog id="bronzeModal">
   <h2>Bronze Membership</h2>
   <p>Training sessions, directory listing, and event discounts.</p>
-  <button>Close</button>
+  <button onclick="this.closest('dialog').close()">Close</button>
 </dialog>
 
 <dialog id="silverModal">
   <h2>Silver Membership</h2>
   <p>Advertising opportunities, spotlight features, and workshops.</p>
-  <button>Close</button>
+  <button onclick="this.closest('dialog').close()">Close</button>
 </dialog>
 
 <dialog id="goldModal">
   <h2>Gold Membership</h2>
   <p>Premium advertising, sponsorships, and exclusive events.</p>
-  <button>Close</button>
+  <button onclick="this.closest('dialog').close()">Close</button>
 </dialog>
 
 <footer>
