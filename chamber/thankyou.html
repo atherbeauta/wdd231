@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="styles/chamber.css">
+</head>
+
+<body>
+<header>
+  <h1>City Chamber of Commerce</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="discover.html">Discover</a>
+    <a href="directory.html">Directory</a>
+    <a href="join.html">Join</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Thank You for Applying!</h2>
+  <section id="confirmation"></section>
+</main>
+
+<footer>
+  <p>&copy; 2026 City Chamber of Commerce</p>
+</footer>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const fields = ["fname", "lname", "email", "phone", "business", "timestamp"];
+
+  document.getElementById("confirmation").innerHTML =
+    fields.map(f => `<p><strong>${f}:</strong> ${params.get(f)}</p>`).join("");
+</script>
+</body>
+</html>

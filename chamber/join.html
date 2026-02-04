@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Join the Chamber</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join the local chamber of commerce">
+
+  <link rel="stylesheet" href="styles/chamber.css">
+  <script src="scripts/join.js" defer></script>
+</head>
+
+<body>
+<header>
+  <h1>City Chamber of Commerce</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="discover.html">Discover</a>
+    <a href="directory.html">Directory</a>
+    <a href="join.html" class="active">Join</a>
+  </nav>
+</header>
+
+<main class="join-layout">
+  <!-- FORM -->
+  <form method="get" action="thankyou.html" class="join-form">
+    <h2>Membership Application</h2>
+
+    <label>
+      First Name
+      <input type="text" name="fname" required title="First Name" autocomplete="given-name">
+    </label>
+
+    <label>
+      Last Name
+      <input type="text" name="lname" required title="Last Name" autocomplete="family-name">
+    </label>
+
+    <label>
+      Organizational Title
+      <input type="text"
+             name="orgtitle"
+             title="Organizational Title"
+             autocomplete="organization-title"
+             pattern="[A-Za-z\s\-]{7,}">
+    </label>
+
+    <label>
+      Email
+      <input type="email"
+             name="email"
+             required
+             title="Email Address"
+             autocomplete="email"
+             placeholder="example@email.com">
+    </label>
+
+    <label>
+      Mobile Phone
+      <input type="tel"
+             name="phone"
+             required
+             title="Mobile Phone"
+             autocomplete="tel">
+    </label>
+
+    <label>
+      Business / Organization Name
+      <input type="text"
+             name="business"
+             required
+             title="Business Name"
+             autocomplete="organization">
+    </label>
+
+    <label>
+      Membership Level
+      <select name="membership" required title="Membership Level">
+        <option value="">Select a level</option>
+        <option value="np">NP Membership</option>
+        <option value="bronze">Bronze Membership</option>
+        <option value="silver">Silver Membership</option>
+        <option value="gold">Gold Membership</option>
+      </select>
+    </label>
+
+    <label>
+      Business Description
+      <textarea name="description" title="Business Description"></textarea>
+    </label>
+
+    <input type="hidden" name="timestamp" id="timestamp">
+
+    <input type="submit" value="Apply for Membership">
+  </form>
+
+  <!-- MEMBERSHIP CARDS -->
+  <section class="membership-cards">
+    <div class="card animate">
+      <h3>NP Membership</h3>
+      <a href="#" data-modal="npModal">View Benefits</a>
+    </div>
+
+    <div class="card animate">
+      <h3>Bronze Membership</h3>
+      <a href="#" data-modal="bronzeModal">View Benefits</a>
+    </div>
+
+    <div class="card animate">
+      <h3>Silver Membership</h3>
+      <a href="#" data-modal="silverModal">View Benefits</a>
+    </div>
+
+    <div class="card animate">
+      <h3>Gold Membership</h3>
+      <a href="#" data-modal="goldModal">View Benefits</a>
+    </div>
+  </section>
+</main>
+
+<!-- MODALS -->
+<dialog id="npModal">
+  <h2>NP Membership</h2>
+  <p>No cost. Access to networking events and basic directory listing.</p>
+  <button>Close</button>
+</dialog>
+
+<dialog id="bronzeModal">
+  <h2>Bronze Membership</h2>
+  <p>Training sessions, directory listing, and event discounts.</p>
+  <button>Close</button>
+</dialog>
+
+<dialog id="silverModal">
+  <h2>Silver Membership</h2>
+  <p>Advertising opportunities, spotlight features, and workshops.</p>
+  <button>Close</button>
+</dialog>
+
+<dialog id="goldModal">
+  <h2>Gold Membership</h2>
+  <p>Premium advertising, sponsorships, and exclusive events.</p>
+  <button>Close</button>
+</dialog>
+
+<footer>
+  <p>&copy; 2026 City Chamber of Commerce</p>
+</footer>
+</body>
+</html>
