@@ -43,8 +43,9 @@ export const places = [
   },
   {
     name: "Art Gallery",
-    address: "33 Culture Ln, City",
-    description: "Gallery featuring local and international artists.",
-    image: "https://images.unsplash.com/photo-1544967882-6abec6e24c23?auto=format&fit=crop&w=300&h=200&q=80"
-  }
+    address: "123 Main St",
+    description: "A popular local art gallery.",
+    image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=300&h=200&q=80"
+  },
+  // ... autres 7 lieux
 ];
