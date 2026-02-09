@@ -1,76 +1,75 @@
-body {
-  font-family: Arial, sans-serif;
+#discoverGrid {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* CARD */
+.discover-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.discover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.discover-card h2 {
+  font-size: 1.2rem;
+  margin: 1rem;
+  color: #2c3e50;
+}
+
+.discover-card figure {
   margin: 0;
-  line-height: 1.6;
+  overflow: hidden;
 }
 
-header, footer {
-  background: #1b2a41;
-  color: #fff;
-  padding: 1rem;
-}
-
-nav a {
-  color: #fff;
-  margin-right: 1rem;
-  text-decoration: none;
-}
-
-nav a.active {
-  text-decoration: underline;
-}
-
-.join-layout {
-  display: grid;
-  gap: 2rem;
-  padding: 1rem;
-}
-
-.join-form label {
-  display: block;
-  margin-bottom: 1rem;
-}
-
-input, select, textarea {
+.discover-card img {
   width: 100%;
-  padding: 0.5rem;
+  height: auto;
+  display: block;
 }
 
-.membership-cards {
-  display: grid;
-  gap: 1rem;
-}
+/* Hover effect (DESKTOP ONLY) */
+@media (min-width: 641px) {
+  .discover-card img {
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
 
-.card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  background: #f5f5f5;
-}
-
-.animate {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1s ease forwards;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .discover-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
   }
 }
 
-dialog {
-  padding: 1.5rem;
-  max-width: 400px;
+.discover-card address {
+  font-style: normal;
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 1rem;
 }
 
-::backdrop {
-  background: rgba(0,0,0,0.5);
+.discover-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0.5rem 1rem 1rem;
 }
 
-@media (min-width: 768px) {
-  .join-layout {
-    grid-template-columns: 2fr 1fr;
-  }
+.discover-card button {
+  margin: 0 1rem 1.2rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #1e6f5c;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.discover-card button:hover {
+  background-color: #145c4a;
 }
