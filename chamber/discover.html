@@ -2,32 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Discover our city and places of interest">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discover | City Chamber of Commerce</title>
+  <meta name="description" content="Discover important attractions and businesses in the City Chamber area.">
+  <title>Discover | City Chamber</title>
 
   <link rel="stylesheet" href="styles/chamber.css">
   <script src="scripts/discover.js" type="module" defer></script>
 </head>
 
 <body>
+
 <header>
   <h1>City Chamber of Commerce</h1>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="discover.html" class="active">Discover</a>
-    <a href="directory.html">Directory</a>
-    <a href="join.html">Join</a>
+    <ul class="navigation">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="discover.html" class="active">Discover</a></li>
+      <li><a href="directory.html">Directory</a></li>
+      <li><a href="join.html">Join</a></li>
+    </ul>
   </nav>
 </header>
 
 <main>
-  <section class="visit-message" id="visitMessage"></section>
-  <section class="discover-grid" id="discoverGrid"></section>
+  <h2>Discover Our City</h2>
+  <p id="visitMessage"></p>
+
+  <div id="discoverGrid"></div>
 </main>
 
 <footer>
   <p>&copy; 2026 City Chamber of Commerce</p>
 </footer>
+
 </body>
 </html>

@@ -1,32 +1,26 @@
+/* ---------- Discover Page ---------- */
+
 #discoverGrid {
   display: grid;
   gap: 1.5rem;
   padding: 1rem;
 }
 
-/* CARD */
 .discover-card {
-  background-color: #ffffff;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
 
-.discover-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.discover-card h2 {
-  font-size: 1.2rem;
+.discover-card h3 {
   margin: 1rem;
-  color: #2c3e50;
+  font-size: 1.2rem;
 }
 
 .discover-card figure {
   margin: 0;
-  overflow: hidden;
 }
 
 .discover-card img {
@@ -35,41 +29,74 @@
   display: block;
 }
 
-/* Hover effect (DESKTOP ONLY) */
-@media (min-width: 641px) {
-  .discover-card img {
-    transition: transform 0.4s ease, filter 0.4s ease;
-  }
-
-  .discover-card:hover img {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-  }
-}
-
 .discover-card address {
+  margin: 0 1rem;
   font-style: normal;
   font-size: 0.9rem;
   color: #555;
-  margin: 0 1rem;
 }
 
 .discover-card p {
+  margin: 0.5rem 1rem 1rem;
   font-size: 0.95rem;
   line-height: 1.5;
-  margin: 0.5rem 1rem 1rem;
 }
 
 .discover-card button {
-  margin: 0 1rem 1.2rem;
+  margin: 0 1rem 1rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #1e6f5c;
-  color: #fff;
+  background: #1e6f5c;
+  color: white;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.discover-card button:hover {
-  background-color: #145c4a;
+/* Hover only desktop */
+@media (min-width: 641px) {
+  .discover-card img {
+    transition: transform 0.4s ease;
+  }
+
+  .discover-card:hover img {
+    transform: scale(1.05);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  #discoverGrid {
+    grid-template-areas:
+      "card1"
+      "card2"
+      "card3"
+      "card4"
+      "card5"
+      "card6"
+      "card7"
+      "card8";
+  }
+}
+
+/* Medium */
+@media (min-width: 641px) and (max-width: 1024px) {
+  #discoverGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "card1 card2"
+      "card3 card4"
+      "card5 card6"
+      "card7 card8";
+  }
+}
+
+/* Large */
+@media (min-width: 1025px) {
+  #discoverGrid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "card1 card1 card2 card3"
+      "card4 card5 card6 card6"
+      "card7 card8 card8 card8";
+  }
 }
