@@ -1,103 +1,117 @@
-/* ---------- Discover Page ---------- */
-
-#discoverGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  padding: 1rem;
+:root {
+    --primary: #003366;
+    --secondary: #f4f4f4;
+    --accent: #d4af37;
+    --text: #333;
+    --card-bg: #ffffff;
 }
 
-.discover-card {
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--secondary);
 }
 
-.discover-card h3 {
-  margin: 1rem;
-  font-size: 1.2rem;
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem;
+    text-align: center;
 }
 
-.discover-card figure {
-  margin: 0;
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 1rem;
 }
 
-.discover-card img {
-  width: 100%;
-  height: auto;
-  display: block;
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.discover-card address {
-  margin: 0 1rem;
-  font-style: normal;
-  font-size: 0.9rem;
-  color: #555;
+nav a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+
+.directory-controls {
+    text-align: center;
+    padding: 2rem 0;
 }
 
-.discover-card p {
-  margin: 0.5rem 1rem 1rem;
-  font-size: 0.95rem;
-  line-height: 1.5;
+.toggle-buttons button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid var(--primary);
+    background: white;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-.discover-card button {
-  margin: 0 1rem 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  background: #1e6f5c;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
+.toggle-buttons button:hover { background: var(--primary); color: white; }
+
+/* Grid View Styles */
+.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-/* Hover only desktop */
-@media (min-width: 641px) {
-  .discover-card img {
-    transition: transform 0.4s ease;
-  }
-
-  .discover-card:hover img {
-    transform: scale(1.05);
-  }
+.grid-view section {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Mobile */
-@media (max-width: 640px) {
-  #discoverGrid {
-    grid-template-areas:
-      "card1"
-      "card2"
-      "card3"
-      "card4"
-      "card5"
-      "card6"
-      "card7"
-      "card8";
-  }
+.grid-view img {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 1rem;
 }
 
-/* Medium */
-@media (min-width: 641px) and (max-width: 1024px) {
-  #discoverGrid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "card1 card2"
-      "card3 card4"
-      "card5 card6"
-      "card7 card8";
-  }
+/* List View Styles - CRITICAL: No images in list view */
+.list-view {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
 }
 
-/* Large */
-@media (min-width: 1025px) {
-  #discoverGrid {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-areas:
-      "card1 card1 card2 card3"
-      "card4 card5 card6 card6"
-      "card7 card8 card8 card8";
-  }
+.list-view section {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+    align-items: center;
+}
+
+.list-view section:nth-child(even) { background-color: #f9f9f9; }
+.list-view img { display: none; }
+.list-view h3 { font-size: 1.1rem; }
+
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+    .list-view section {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
 }
