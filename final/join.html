@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Join the Legend of Muamba guild.">
+<meta name="author" content="Kazadi Athanase Muamba">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join | Legend of Muamba</title>
+<link rel="stylesheet" href="styles/styles.css">
+<link rel="icon" href="images/favicon.ico">
+</head>
+
+<body>
+
+<header>
+<h1>⚔️ Legend of Muamba</h1>
+<button id="menu">☰</button>
+<nav>
+<ul class="navigation">
+<li><a href="index.html">Home</a></li>
+<li><a href="characters.html">Characters</a></li>
+<li><a href="join.html" class="active">Join</a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<h2>Join the Guild</h2>
+
+<form method="get" action="form-action.html" class="form">
+
+<label for="fullname">Full Name</label>
+<input type="text" id="fullname" name="fullname" required>
+
+<label for="email">Email</label>
+<input type="email" id="email" name="email" required>
+
+<label for="role">Choose Role</label>
+<select id="role" name="role" required>
+<option value="">Select...</option>
+<option value="Warrior">Warrior</option>
+<option value="Mage">Mage</option>
+<option value="Archer">Archer</option>
+</select>
+
+<label>
+<input type="checkbox" name="agreement" required>
+I accept the guild oath
+</label>
+
+<button type="submit">Join Now</button>
+
+</form>
+</main>
+
+<footer>
+<p>© 2026 Kazadi Athanase Muamba</p>
+<a href="attributions.html">Attributions</a>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

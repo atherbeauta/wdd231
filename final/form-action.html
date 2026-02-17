@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Form submission confirmation.">
+<meta name="author" content="Kazadi Athanase Muamba">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmation | Legend of Muamba</title>
+<link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+
+<header>
+<h1>Guild Confirmation</h1>
+</header>
+
+<main>
+<h2>Welcome to the Guild!</h2>
+<div id="results"></div>
+</main>
+
+<footer>
+<p>© 2026 Kazadi Athanase Muamba</p>
+</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const fullname = params.get("fullname");
+const email = params.get("email");
+const role = params.get("role");
+
+document.getElementById("results").innerHTML = `
+<p><strong>Name:</strong> ${fullname}</p>
+<p><strong>Email:</strong> ${email}</p>
+<p><strong>Role:</strong> ${role}</p>
+`;
+</script>
+
+</body>
+</html>
