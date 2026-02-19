@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="Meet the heroes of Legend of Muamba.">
-<meta name="author" content="Kazadi Athanase Muamba">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Characters | Legend of Muamba</title>
-<link rel="stylesheet" href="styles/styles.css">
-<link rel="icon" href="images/favicon.ico">
-<meta property="og:title" content="Legend of Muamba Characters">
-<meta property="og:description" content="Choose your hero and begin your quest.">
-<meta property="og:type" content="website">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters | Legend of Muamba</title>
+    <meta name="description" content="Meet the legendary heroes of Muamba.">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- Load main logic as module to support imports -->
+    <script src="scripts/main.js" type="module" defer></script>
 </head>
-
 <body>
+    <header>
+        <div class="header-container">
+            <h1>⚔️ Legend of Muamba</h1>
+            <!-- ID "menu" matched with main.js -->
+            <button id="menu" aria-label="Menu">☰</button>
+            <nav>
+                <ul class="navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="characters.html" class="active">Characters</a></li>
+                    <li><a href="join.html">Join</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<header>
-<h1>⚔️ Legend of Muamba</h1>
-<button id="menu">☰</button>
-<nav>
-<ul class="navigation">
-<li><a href="index.html">Home</a></li>
-<li><a href="characters.html" class="active">Characters</a></li>
-<li><a href="join.html">Join</a></li>
-</ul>
-</nav>
-</header>
+    <main>
+        <section class="intro">
+            <h2>Our Heroes</h2>
+            <div id="welcome-message"></div>
+        </section>
 
-<main>
-<h2>Choose Your Hero</h2>
-<section id="characters-container" class="grid"></section>
-</main>
+        <!-- Container for dynamic JS injection -->
+        <div id="characters-container" class="grid-layout"></div>
 
-<div id="modal" class="modal hidden">
-  <div class="modal-content">
-    <button id="close">✖</button>
-    <div id="modal-info"></div>
-  </div>
-</div>
+        <!-- Modal Structure -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <button id="close" class="close-btn">✖</button>
+                <div id="modal-info">
+                    <!-- Dynamic content injected here -->
+                </div>
+            </div>
+        </div>
+    </main>
 
-<footer>
-<p>© 2026 Kazadi Athanase Muamba</p>
-<a href="attributions.html">Attributions</a>
-<a href="https://youtube.com/YOURVIDEO" target="_blank">Project Video</a>
-</footer>
-
-<script type="module" src="js/main.js"></script>
+    <footer>
+        <p>&copy; <span id="year"></span> Kazadi Athanase Muamba</p>
+        <p>Last Modified: <span id="lastModified"></span></p>
+        <a href="attributions.html">Attributions</a>
+    </footer>
 </body>
 </html>
